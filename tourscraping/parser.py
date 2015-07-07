@@ -3,6 +3,7 @@ import json
 from google.appengine.api import urlfetch
 from stage import Stage,StageDetails,StageClasification
 from bs4 import BeautifulSoup
+import codecs
 
 
 def stage_clasification_parser(stage_number):
@@ -20,7 +21,6 @@ def stage_clasification_parser(stage_number):
     page = urllib2.urlopen(url)
     soup = BeautifulSoup(page, "html.parser")
     tables = soup.findAll("table",{"class":"clasificacion_etapa"})
-    print len(tables)
     table_count=0
     for table in tables:
         stage_clas=[]
@@ -42,7 +42,8 @@ def stage_clasification_parser(stage_number):
     stage_classification = StageClasification(id=stage_number,data=json.dumps(data))
     stage_classification.put()
 
-def stage_detail_parse(url,stage_number):
+def stage_detail_parse(stage_number,url):
+    print url
     data={}
     urlfetch.set_default_fetch_deadline(45)
     images_json=[]
@@ -55,6 +56,8 @@ def stage_detail_parse(url,stage_number):
     for image in images:
         if "Stage" in image["src"]:
             images_json.append(image["src"])
+        if "Final_GC" in image["src"]:
+            images_json.append(image["src"])
         if "site-icons" in image["src"]:
             data['stage-icon']=image["src"]
         cont=0
@@ -62,11 +65,12 @@ def stage_detail_parse(url,stage_number):
         data['stage-images']=images_json
 
         for element in tabulka.parent:
-            #The interesting information doesn't have a tag
-            if element.name is None and "\n" not in element.string and element.string !=" " and  "Tag for network 919" not in element.string:
-                data[data_order[cont]]=element.string
-                cont+=1
-        stage_details = StageDetails(id=stage_number,data=str(data))
+            if(cont<len(data_order)):
+                if element.name is None and "\n" not in element.string and element.string !=" " and  "Tag for network 919" not in element.string:
+                                        #The interesting information doesn't have a tag
+                    data[data_order[cont]]=element.string
+                    cont+=1
+        stage_details = StageDetails(id=stage_number,data=json.dumps(data))
         stage_details.put()
 
 
@@ -82,27 +86,52 @@ def generate_tour_data():
         col = row.findAll('td')
         data={}
         images=[]
-        count=0
+        count=1
         for td in col:
             #Looking for the date
             if(td.string):
-                data[data_order[count]]=td.string
+                if(count==1):
+                    data["date"]=td.string
+                    count+=1
             #Do we have icons?
             imgs=td.findAll('img')
             if imgs:
                 for img in imgs:
                     images.append(img["src"])
-                data[data_order[count]]=images
+                data["stage_icons"]=images
             #Names for the winner and the leader
             links = td.findAll('a')
+
             for link in links:
-                if(link.string):
-                    if "race/" in link['href']:
+                if count==2:
+                    if(link.string):
                         data["stage-link"]="http://www.procyclingstats.com/"+link['href']
-                        count+=1
-                        data[data_order[count]]=link.string
-                    count+=1
-            if data:
-                stage_count+=1
+                    else:
+                        data["stage-link"]=""
+                if count==3:
+                    if(link.string):
+                        data["stage-winner"]=link.string
+                    else:
+                        data["stage-winner"]=""
+                if count==4:
+                    if(link.string):
+                        if(link.string.isdigit()):
+                            data["km"]=link.string
+                            data["stage-leader"]=""
+                        else:
+                            data["stage-leader"]=link.string
+                    else:
+                        data["stage-leader"]=""
+                if count==5:
+                    if(link.string):
+                        data["km"]=link.string
+                    else:
+                        data["km"]=""
+
+                count+=1
+
+        if data:
+            stage_count+=1
+            if(stage_count<22):
                 stage = Stage(id=stage_count,data=json.dumps(data))
                 stage.put()
