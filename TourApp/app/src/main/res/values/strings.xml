@@ -2,4 +2,7 @@
     <string name="app_name">TourApp</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="km_string">%1$s km</string>
+    <string name="stage_winner_string">Winner: %1$s</string>
+    <string name="stage_leader_string">Leader: %1$s</string>
 </resources>

@@ -1,0 +1,4 @@
+cron:
+- description: daily tour scrapping
+  url: /tasks
+  schedule: every 1 hours from 16:00 to 19:00
