@@ -40,7 +40,6 @@ public class MainActivityFragment extends Fragment implements GetStagesListener 
         ArrayList<TourStage> tourStages = new ArrayList<>();
         mAdapter = new TourStageAdapter(tourStages,getActivity());
         mRecyclerView.setAdapter(mAdapter);
-
         return rootView;
     }
 

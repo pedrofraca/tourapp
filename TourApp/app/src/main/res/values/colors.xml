@@ -2,4 +2,6 @@
     <color name="color_primary">#FFEB3B</color>
     <color name="color_primary_dark">#FDD835</color>
     <color name="color_accent">#FFD600</color>
+    <color name="window_background">#FFF5F5F5</color>
+
 </resources>

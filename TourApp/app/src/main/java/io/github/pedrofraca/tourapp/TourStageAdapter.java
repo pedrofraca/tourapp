@@ -1,6 +1,10 @@
 package io.github.pedrofraca.tourapp;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +33,7 @@ public class TourStageAdapter extends RecyclerView.Adapter<TourStageAdapter.View
         public TextView mStageLeader;
         public TextView mStageKm;
         public View mShadowView;
+        public CardView mCardView;
         // each data item is just a string in this case
         public ImageView mStageImageView;
         public ViewHolder(View v) {
@@ -40,6 +45,7 @@ public class TourStageAdapter extends RecyclerView.Adapter<TourStageAdapter.View
             mStageKm=(TextView) v.findViewById(R.id.item_tour_stage_km);
             mShadowView = v.findViewById(R.id.item_tour_shadow);
             mLeaderBoardView = v.findViewById(R.id.item_tour_leader_board);
+            mCardView= (CardView) v.findViewById(R.id.item_tour_card_view);
         }
     }
 
@@ -62,10 +68,11 @@ public class TourStageAdapter extends RecyclerView.Adapter<TourStageAdapter.View
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         TourStage tourStage = mDataset.get(position);
         holder.mStageName.setText(tourStage.getDescription());
         holder.mStageKm.setText(mActivity.getString(R.string.km_string, tourStage.getKm()));
+        holder.mCardView.setTag(position);
         Picasso.with(mActivity).load("http://tourscraping.appspot.com/image?stage="+(position+1)).into(holder.mStageImageView);
         if(!tourStage.completed()){
             holder.mLeaderBoardView.setVisibility(View.GONE);
@@ -76,7 +83,21 @@ public class TourStageAdapter extends RecyclerView.Adapter<TourStageAdapter.View
             holder.mStageLeader.setText(mActivity.getString(R.string.stage_leader_string,tourStage.getLeader()));
             holder.mStageWinner.setText(mActivity.getString(R.string.stage_winner_string, tourStage.getWinner()));
         }
-
+        holder.mCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mActivity, DetailActivity.class);
+                // create the transition animation - the images in the layouts
+                // of both activities are defined with android:transitionName="robot"
+                Pair<View, String> p1 = Pair.create((View)holder.mStageImageView, DetailActivity.ATTR_IMG);
+                ActivityOptionsCompat options = ActivityOptionsCompat
+                        .makeSceneTransitionAnimation(mActivity,p1);
+                // start the new activity
+                int position = (int) view.getTag();
+                intent.putExtra(DetailActivity.ATTR_IMG,"http://tourscraping.appspot.com/image?stage="+(position+1));
+                mActivity.startActivity(intent, options.toBundle());
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)

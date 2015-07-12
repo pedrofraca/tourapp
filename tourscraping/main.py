@@ -194,7 +194,7 @@ class ImageHandler(webapp2.RequestHandler):
         stage_key = self.request.get('stage')
         stage=StageDetails.get_by_id(stage_key)
         dict = json.loads(stage.data)
-        self.redirect(str(dict['stage-images'][0]))
+        self.redirect('http://estaticos02.marca.com/albumes/2015/07/09/6_etapa_tour_francia/1436467168_extras_albumes_0_980.jpg')
 
 
 app = webapp2.WSGIApplication([
