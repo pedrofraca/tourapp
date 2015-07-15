@@ -6,5 +6,5 @@ class Stage(ndb.Model):
 class StageClasification(ndb.Model):
     data = ndb.StringProperty(indexed=False)
 
-class StageDetails(ndb.Model):
+class StageImages(ndb.Model):
     data = ndb.StringProperty(indexed=False)

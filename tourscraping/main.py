@@ -1,13 +1,37 @@
 import webapp2
 import json
-from stage import Stage,StageDetails,StageClasification
+from stage import Stage,StageImages,StageClasification
 import urllib2, re
 from google.appengine.api import urlfetch
 from bs4 import BeautifulSoup
 import codecs
 from google.appengine.api import taskqueue
+import random
 
+def images_parser():
+    urlfetch.set_default_fetch_deadline(45)
+    page = urllib2.urlopen("http://www.letour.fr/le-tour/2015/es/galeria.html")
+    soup = BeautifulSoup(page, "html.parser")
+    divs = soup.findAll("div",{"class":"diapo v2 photo"})
+    for div in divs:
+        stage=None
+        images_json=[]
+        titles=div.findAll("h3")
+        for title in titles:
+            spans=title.findAll("span")
+            for span in spans:
+                title_search = re.search('Etapa (.*)', span.string, re.IGNORECASE)
+                if title_search:
+                    stage = title_search.group(1)
+        imgs = div.findAll("img")
+        for img in imgs:
+            images_json.append(img["lazysrc"].replace("s.jpg","b.jpg"))
+        if stage:
+            stage_images = StageImages(id=int(stage),data=json.dumps(images_json))
+            stage_images.put()
 
+            
+    
 def stage_clasification_parser(stage_number):
     data={};
     data_order=["pos","rider","country","team","time"]
@@ -45,7 +69,6 @@ def stage_clasification_parser(stage_number):
     stage_classification.put()
 
 def stage_detail_parse(stage_number,url):
-    print url
     data={}
     urlfetch.set_default_fetch_deadline(45)
     images_json=[]
@@ -72,8 +95,12 @@ def stage_detail_parse(stage_number,url):
                     #The interesting information doesn't have a tag
                     data[data_order[cont]]=element.string
                     cont+=1
-    stage_details = StageDetails(id=stage_number,data=json.dumps(data))
-    stage_details.put()
+    print stage_number
+    stage=Stage.get_by_id(int(stage_number))
+    stage_data=json.loads(stage.data)
+    stage_data.update(data)
+    stage.data=json.dumps(stage_data)
+    stage.put()
 
 
 def generate_tour_data():
@@ -140,10 +167,8 @@ def generate_tour_data():
                 stage = Stage(id=stage_count,data=json.dumps(data))
                 stage.put()
 
-
 class TourHandler(webapp2.RequestHandler):
     def get(self):
-        generate_tour_data()
         q = Stage.query()
         stages=[]
         for stage in q:
@@ -161,6 +186,7 @@ class TaskHandler(webapp2.RequestHandler):
             # Add the task to the default queue.
             taskqueue.add(url='/details', params={'stage_key': stage.key.id(),'stage_link':d["stage-link"]})
             taskqueue.add(url='/clasification', params={'stage_key': stage.key.id()})
+            taskqueue.add(url='/image', params={})
             self.response.out.write("Created Task for stage number: <b>"+str(stage.key.id())+"</b></br>")
 
 
@@ -192,9 +218,14 @@ class StageClasificationHandler(webapp2.RequestHandler):
 class ImageHandler(webapp2.RequestHandler):
     def get(self):
         stage_key = self.request.get('stage')
-        stage=StageDetails.get_by_id(stage_key)
-        dict = json.loads(stage.data)
-        self.redirect('http://estaticos02.marca.com/albumes/2015/07/09/6_etapa_tour_francia/1436467168_extras_albumes_0_980.jpg')
+        stage=StageImages.get_by_id(int(stage_key))
+        if stage:
+            dict = json.loads(stage.data)
+            self.redirect(str(dict[random.randint(0,len(dict))]))
+        else:
+            self.redirect("http://c1.staticflickr.com/9/8256/8701161794_02c1243f4f_n.jpg")
+    def post(self):
+        images_parser()
 
 
 app = webapp2.WSGIApplication([
