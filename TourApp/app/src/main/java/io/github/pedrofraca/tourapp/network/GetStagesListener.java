@@ -1,4 +1,4 @@
-package io.github.pedrofraca.tourapp;
+package io.github.pedrofraca.tourapp.network;
 
 import java.util.List;
 

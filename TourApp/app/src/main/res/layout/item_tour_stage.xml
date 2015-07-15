@@ -7,7 +7,7 @@
         android:id="@+id/item_tour_card_view"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         android:layout_marginBottom="5dp"
         card_view:cardCornerRadius="0dp">
         <LinearLayout
@@ -24,12 +24,18 @@
                     android:id="@+id/item_tour_stage_image"
                     android:layout_width="match_parent"
                     android:scaleType="centerCrop"
-                    android:layout_height="160dp"
-                    android:src="@drawable/stage1"/>
-                <View android:layout_width="match_parent"
-                    android:id="@+id/item_tour_shadow"
                     android:layout_height="match_parent"
-                    android:background="#60000000"/>
+                    android:src="@drawable/stage1"/>
+                <ImageView
+                    android:id="@+id/item_tour_stage_done_icon"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:tint="@color/color_primary_dark"
+                    android:src="@drawable/ic_check"/>
             </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -51,7 +57,8 @@
                         android:id="@+id/item_tour_stage_winner"
                         android:textSize="12dp"
                         android:layout_margin="3dp"
-                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_dark_gray"
                         android:text="Winner:Cancellara"/>
                     <TextView
                         android:layout_width="0dp"
@@ -60,8 +67,9 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/item_tour_stage_leader"
                         android:textSize="12dp"
+                        android:textStyle="bold"
                         android:layout_margin="3dp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text_dark_gray"
                         android:text="Leader:Contador"/>
                 </LinearLayout>
                 <LinearLayout
@@ -71,21 +79,23 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="4"
+                        android:textStyle="bold"
                         android:layout_height="wrap_content"
                         android:id="@+id/item_tour_stage_title"
                         android:textSize="15dp"
                         android:layout_margin="3dp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text_dark_gray"
                         android:text="Amber-Amber"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="right"
+                        android:textStyle="bold"
                         android:layout_height="wrap_content"
                         android:id="@+id/item_tour_stage_km"
                         android:textSize="15dp"
                         android:layout_margin="3dp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/text_dark_gray"
                         android:text="180km"/>
                 </LinearLayout>
 

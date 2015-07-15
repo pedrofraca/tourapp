@@ -1,10 +1,10 @@
-package io.github.pedrofraca.tourapp.model;
+package io.github.pedrofraca.tourapp.network;
 
 import android.os.AsyncTask;
 
 import java.util.List;
 
-import io.github.pedrofraca.tourapp.GetStagesListener;
+import io.github.pedrofraca.tourapp.model.TourStage;
 
 public class GetStagesAsyncTask extends AsyncTask<Void,Void,Exception>{
 

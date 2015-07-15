@@ -1,4 +1,4 @@
-package io.github.pedrofraca.tourapp;
+package io.github.pedrofraca.tourapp.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import io.github.pedrofraca.tourapp.R;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -23,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

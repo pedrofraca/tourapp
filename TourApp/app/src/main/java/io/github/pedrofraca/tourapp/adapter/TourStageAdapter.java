@@ -1,4 +1,4 @@
-package io.github.pedrofraca.tourapp;
+package io.github.pedrofraca.tourapp.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,6 +16,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import io.github.pedrofraca.tourapp.activity.DetailActivity;
+import io.github.pedrofraca.tourapp.R;
 import io.github.pedrofraca.tourapp.model.TourStage;
 
 public class TourStageAdapter extends RecyclerView.Adapter<TourStageAdapter.ViewHolder> {
@@ -32,18 +34,18 @@ public class TourStageAdapter extends RecyclerView.Adapter<TourStageAdapter.View
         public TextView mStageWinner;
         public TextView mStageLeader;
         public TextView mStageKm;
-        public View mShadowView;
         public CardView mCardView;
         // each data item is just a string in this case
         public ImageView mStageImageView;
+        public ImageView mStageImageCompletedIcon;
         public ViewHolder(View v) {
             super(v);
             mStageImageView = (ImageView) v.findViewById(R.id.item_tour_stage_image);
+            mStageImageCompletedIcon = (ImageView) v.findViewById(R.id.item_tour_stage_done_icon);
             mStageName = (TextView) v.findViewById(R.id.item_tour_stage_title);
             mStageWinner= (TextView) v.findViewById(R.id.item_tour_stage_winner);
             mStageLeader= (TextView) v.findViewById(R.id.item_tour_stage_leader);
             mStageKm=(TextView) v.findViewById(R.id.item_tour_stage_km);
-            mShadowView = v.findViewById(R.id.item_tour_shadow);
             mLeaderBoardView = v.findViewById(R.id.item_tour_leader_board);
             mCardView= (CardView) v.findViewById(R.id.item_tour_card_view);
         }
@@ -76,9 +78,9 @@ public class TourStageAdapter extends RecyclerView.Adapter<TourStageAdapter.View
         Picasso.with(mActivity).load("http://tourscraping.appspot.com/image?stage="+(position+1)).into(holder.mStageImageView);
         if(!tourStage.completed()){
             holder.mLeaderBoardView.setVisibility(View.GONE);
-            holder.mShadowView.setVisibility(View.GONE);
+            holder.mStageImageCompletedIcon.setVisibility(View.GONE);
         } else {
-            holder.mShadowView.setVisibility(View.VISIBLE);
+            holder.mStageImageCompletedIcon.setVisibility(View.VISIBLE);
             holder.mLeaderBoardView.setVisibility(View.VISIBLE);
             holder.mStageLeader.setText(mActivity.getString(R.string.stage_leader_string,tourStage.getLeader()));
             holder.mStageWinner.setText(mActivity.getString(R.string.stage_winner_string, tourStage.getWinner()));
@@ -95,6 +97,7 @@ public class TourStageAdapter extends RecyclerView.Adapter<TourStageAdapter.View
                 // start the new activity
                 int position = (int) view.getTag();
                 intent.putExtra(DetailActivity.ATTR_IMG,"http://tourscraping.appspot.com/image?stage="+(position+1));
+                intent.putExtra(DetailActivity.ATTR_STAGE,mDataset.get(position));
                 mActivity.startActivity(intent, options.toBundle());
             }
         });

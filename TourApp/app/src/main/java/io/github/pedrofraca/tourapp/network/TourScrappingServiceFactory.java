@@ -1,6 +1,6 @@
-package io.github.pedrofraca.tourapp.model;
+package io.github.pedrofraca.tourapp.network;
 
-import io.github.pedrofraca.tourapp.TourScrappingService;
+import io.github.pedrofraca.tourapp.network.TourScrappingService;
 import retrofit.RestAdapter;
 
 /**

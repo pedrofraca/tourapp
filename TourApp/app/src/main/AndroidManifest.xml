@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.TourApp" >
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,8 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailActivity"
-            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".activity.DetailActivity"
+            android:parentActivityName=".activity.MainActivity"></activity>
+        <activity android:name=".activity.FullScreenImagesActivity"
+            android:parentActivityName=".activity.DetailActivity"></activity>
+        <activity android:name=".activity.ClasificationActivity"
+            android:parentActivityName=".activity.DetailActivity"></activity>
     </application>
 
 </manifest>
