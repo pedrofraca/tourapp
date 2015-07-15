@@ -7,10 +7,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.squareup.picasso.Picasso;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -44,10 +47,10 @@ public class DetailActivity extends AppCompatActivity {
 
 
         final TourStage stage = getIntent().getParcelableExtra(ATTR_STAGE);
-        collapsingToolbar.setTitle(stage.getStartFinish());
+        collapsingToolbar.setTitle(stage.getDescription());
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.activity_detail_view_pager);
-        viewPager.setAdapter(new TourStageImagesAdapter(stage.getImages(),stage.getStartFinish()));
+        viewPager.setAdapter(new TourStageImagesAdapter(stage.getImages(),stage.getDescription()));
 
         CirclePageIndicator circlePageIndicator = (CirclePageIndicator) findViewById(R.id.activity_detail_page_indicator);
         circlePageIndicator.setFillColor(getResources().getColor(R.color.color_primary_dark));
@@ -67,11 +70,24 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         View clasification = findViewById(R.id.activity_detail_clasification_button);
+        if(!stage.completed()){
+            clasification.setVisibility(View.GONE);
+        }
         clasification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ClasificationActivity.launch(DetailActivity.this);
+                ClasificationActivity.launch(DetailActivity.this, stage.getStage());
             }
         });
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        Log.d("restore","restore");
+        super.onRestoreInstanceState(savedInstanceState);
     }
 }

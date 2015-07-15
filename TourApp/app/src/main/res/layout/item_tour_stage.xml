@@ -25,6 +25,7 @@
                     android:layout_width="match_parent"
                     android:scaleType="centerCrop"
                     android:layout_height="match_parent"
+                    android:tint="#22000000"
                     android:src="@drawable/stage1"/>
                 <ImageView
                     android:id="@+id/item_tour_stage_done_icon"

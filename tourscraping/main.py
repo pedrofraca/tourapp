@@ -29,7 +29,6 @@ def images_parser():
         if stage:
             stage_images = StageImages(id=int(stage),data=json.dumps(images_json))
             stage_images.put()
-
             
     
 def stage_clasification_parser(stage_number):
@@ -163,6 +162,7 @@ def generate_tour_data():
 
         if data:
             stage_count+=1
+            data["stage"]=str(stage_count)
             if(stage_count<22):
                 stage = Stage(id=stage_count,data=json.dumps(data))
                 stage.put()
@@ -213,7 +213,7 @@ class StageClasificationHandler(webapp2.RequestHandler):
         stage_key = self.request.get('stage')
         stage_details=StageClasification.get_by_id(stage_key)
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.out.write(json.dumps(stage_details.data))
+        self.response.out.write(json.dumps(json.loads(stage_details.data)))
 
 class ImageHandler(webapp2.RequestHandler):
     def get(self):

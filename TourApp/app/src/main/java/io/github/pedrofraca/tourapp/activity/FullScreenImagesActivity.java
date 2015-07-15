@@ -7,6 +7,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -47,6 +49,11 @@ public class FullScreenImagesActivity extends AppCompatActivity {
         circlePageIndicator.setFillColor(getResources().getColor(R.color.text_dark_gray));
         circlePageIndicator.setStrokeColor(getResources().getColor(R.color.text_dark_gray));
         circlePageIndicator.setViewPager(viewPager);
+
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
     }
 }

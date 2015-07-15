@@ -17,14 +17,16 @@ import java.util.List;
 
 import io.github.pedrofraca.tourapp.R;
 import io.github.pedrofraca.tourapp.fragment.ClasificationListFragment;
+import io.github.pedrofraca.tourapp.model.TourStageClasification;
+import io.github.pedrofraca.tourapp.network.GetClasificationAsyncTask;
+import io.github.pedrofraca.tourapp.network.GetClasificationStageListener;
 
-/**
- * Created by pedrofraca on 14/07/15.
- */
-public class ClasificationActivity  extends AppCompatActivity {
-
-    public static void launch(Activity callerActivity){
+public class ClasificationActivity  extends AppCompatActivity implements GetClasificationStageListener {
+    public static final String ATTR_STAGE="attr_stage";
+    private ViewPager mViewPager;
+    public static void launch(Activity callerActivity,String stage){
         Intent intent = new Intent(callerActivity,ClasificationActivity.class);
+        intent.putExtra(ATTR_STAGE,stage);
         callerActivity.startActivity(intent);
     }
 
@@ -38,24 +40,34 @@ public class ClasificationActivity  extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         final ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
 
+        mViewPager= (ViewPager) findViewById(R.id.viewpager);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        if (viewPager != null) {
-            setupViewPager(viewPager);
-        }
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        new GetClasificationAsyncTask(this,getIntent().getExtras().getString(ATTR_STAGE)).execute();
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(ViewPager viewPager, TourStageClasification clasification) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new ClasificationListFragment(), "Category 1");
-        adapter.addFragment(new ClasificationListFragment(), "Category 2");
+        adapter.addFragment(new ClasificationListFragment().newInstance(clasification.getStage()), getString(R.string.stage));
+        adapter.addFragment(new ClasificationListFragment().newInstance(clasification.getGeneral()), getString(R.string.general));
+        adapter.addFragment(new ClasificationListFragment().newInstance(clasification.getMountain()), getString(R.string.mountain));
+        adapter.addFragment(new ClasificationListFragment().newInstance(clasification.getRegularity()), getString(R.string.regularity));
+        adapter.addFragment(new ClasificationListFragment().newInstance(clasification.getTeam()), getString(R.string.team));
         viewPager.setAdapter(adapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+    }
+
+    @Override
+    public void onClasificationReceived(TourStageClasification clasification) {
+        setupViewPager(mViewPager,clasification);
+    }
+
+    @Override
+    public void onClasificationError(Exception error) {
+        error.printStackTrace();
     }
 
     static class Adapter extends FragmentPagerAdapter {

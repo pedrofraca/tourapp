@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.pedrofraca.tourapp.activity.MainActivity;
 import io.github.pedrofraca.tourapp.network.GetStagesListener;
 import io.github.pedrofraca.tourapp.R;
 import io.github.pedrofraca.tourapp.adapter.TourStageAdapter;
@@ -55,6 +56,7 @@ public class MainActivityFragment extends Fragment implements GetStagesListener 
         mAdapter = new TourStageAdapter(stages,getActivity());
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
+        ((MainActivity)getActivity()).hideProgressBar();
     }
 
 
@@ -69,6 +71,7 @@ public class MainActivityFragment extends Fragment implements GetStagesListener 
         super.onViewStateRestored(savedInstanceState);
         if(savedInstanceState!=null){
             mStages=savedInstanceState.getParcelableArrayList(ATTR_DATASET);
+            if(mStages==null) return;
             mAdapter = new TourStageAdapter(mStages,getActivity());
             mRecyclerView.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
@@ -77,6 +80,6 @@ public class MainActivityFragment extends Fragment implements GetStagesListener 
 
     @Override
     public void onStagesError(Exception error) {
-
+        ((MainActivity)getActivity()).showErrorMessage(error.getMessage());
     }
 }

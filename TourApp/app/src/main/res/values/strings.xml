@@ -12,4 +12,10 @@
         Leader after stage: %3$s &lt;br /&gt;</string>
     <string name="details_info_simple">Distance: %1$s</string>
     <string name="show_clasifications">Show Clasification</string>
+    <string name="stage">Stage</string>
+    <string name="general">General</string>
+    <string name="mountain">Mountain</string>
+    <string name="team">Team</string>
+    <string name="regularity">Regularity</string>
+    <string name="stage_images">Stage Images</string>
 </resources>

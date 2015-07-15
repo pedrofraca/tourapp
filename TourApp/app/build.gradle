@@ -29,5 +29,6 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.chrisbanes.photoview:library:1.2.3'
     compile 'com.mcxiaoke.viewpagerindicator:library:2.4.1'
+    compile 'com.google.android.gms:play-services-ads:7.5.0'
 }
 

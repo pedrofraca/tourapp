@@ -16,6 +16,7 @@ public class TourStage implements Parcelable {
     private String km;
     private String imgUrl;
     private String date;
+    private String stage;
     @SerializedName("avg-speed") private String avgSpeed;
     @SerializedName("start-finish") private String startFinish;
 
@@ -34,6 +35,7 @@ public class TourStage implements Parcelable {
     public String getKm() {
         return km;
     }
+    public String getStage(){return stage;}
 
     public String getWinner() {
         return stagewinner;
@@ -74,6 +76,7 @@ public class TourStage implements Parcelable {
         parcel.writeSerializable(images);
         parcel.writeString(avgSpeed);
         parcel.writeString(startFinish);
+        parcel.writeString(stage);
     }
 
 
@@ -98,6 +101,7 @@ public class TourStage implements Parcelable {
         images= (ArrayList<String>) in.readSerializable();
         avgSpeed=in.readString();
         startFinish=in.readString();
+        stage=in.readString();
     }
 
 }

@@ -2,6 +2,8 @@
 *.apk
 *.ap_
 
+keystore.jks
+
 # Files for the Dalvik VM
 *.dex
 
@@ -28,3 +30,4 @@ proguard/
 *.pyc
 
 .DS_Store
+
