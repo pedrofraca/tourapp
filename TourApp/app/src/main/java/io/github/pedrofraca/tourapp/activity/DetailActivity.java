@@ -1,25 +1,24 @@
 package io.github.pedrofraca.tourapp.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
+import androidx.viewpager.widget.ViewPager;
+
+import com.example.api.model.TourStage;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.squareup.picasso.Picasso;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import io.github.pedrofraca.tourapp.R;
 import io.github.pedrofraca.tourapp.adapter.TourStageImagesAdapter;
-import io.github.pedrofraca.tourapp.model.TourStage;
 
 
 public class DetailActivity extends AppCompatActivity {
@@ -76,13 +75,13 @@ public class DetailActivity extends AppCompatActivity {
         clasification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ClasificationActivity.launch(DetailActivity.this, stage.getStage());
+                //ClasificationActivity.launch(DetailActivity.this, stage.getStage());
             }
         });
 
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+//        AdView mAdView = (AdView) findViewById(R.id.adView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        mAdView.loadAd(adRequest);
     }
 
     @Override

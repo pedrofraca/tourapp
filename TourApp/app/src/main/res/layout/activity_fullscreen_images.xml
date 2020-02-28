@@ -7,13 +7,13 @@
     android:background="@android:color/white"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -21,22 +21,22 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:layout_scrollFlags="scroll|enterAlways" />
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:layout_above="@+id/adView"
         android:id="@+id/activity_fullscreen_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ads:adSize="BANNER"
-        android:layout_marginBottom="10dp"
-        android:layout_above="@+id/activity_fullscreen_page_indicator"
-        ads:adUnitId="ca-app-pub-6999088438037061/7705410238"/>
+    <!--<com.google.android.gms.ads.AdView-->
+        <!--android:id="@+id/adView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--ads:adSize="BANNER"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:layout_above="@+id/activity_fullscreen_page_indicator"-->
+        <!--ads:adUnitId="ca-app-pub-6999088438037061/7705410238"/>-->
 
     <com.viewpagerindicator.CirclePageIndicator
         android:layout_marginBottom="10dp"
