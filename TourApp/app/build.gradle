@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 29
@@ -6,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "io.github.pedrofraca.tourapp"
-        minSdkVersion 16
+        minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -30,6 +32,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.2'
 
     implementation project(path: ':data')
+    implementation project(path: ':api')
 
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
     implementation 'androidx.cardview:cardview:1.0.0'
@@ -38,6 +41,12 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.github.chrisbanes.photoview:library:1.2.3'
     implementation 'com.mcxiaoke.viewpagerindicator:library:2.4.1'
-   // implementation 'com.google.android.gms:play-services-ads:17.2.1'
+    implementation "androidx.core:core-ktx:+"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // implementation 'com.google.android.gms:play-services-ads:17.2.1'
+}
+repositories {
+    mavenCentral()
 }
 

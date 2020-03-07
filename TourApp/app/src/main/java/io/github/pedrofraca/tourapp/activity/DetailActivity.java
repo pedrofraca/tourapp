@@ -12,7 +12,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.api.model.TourStage;
+import io.github.pedrofraca.domain.model.StageModel;
+import io.github.pedrofraca.tour.api.model.Stage;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.squareup.picasso.Picasso;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -45,7 +46,7 @@ public class DetailActivity extends AppCompatActivity {
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
 
 
-        final TourStage stage = getIntent().getParcelableExtra(ATTR_STAGE);
+        final StageModel stage = getIntent().getParcelableExtra(ATTR_STAGE);
         collapsingToolbar.setTitle(stage.getDescription());
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.activity_detail_view_pager);

@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 29
@@ -24,16 +26,31 @@ android {
 }
 
 dependencies {
+    //internal dependencies
+    api project(':domain')
+    implementation project(':api')
     //ROOM
-    api "androidx.room:room-runtime:2.1.0"
-    annotationProcessor "androidx.room:room-compiler:2.1.0"
-
+    api "androidx.room:room-runtime:2.2.4"
+    annotationProcessor "androidx.room:room-compiler:2.2.4"
     implementation 'com.annimon:stream:1.2.1'
-    api project(":api")
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
-    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
-    testImplementation 'junit:junit:4.12'
+
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    // Because RxAndroid releases are few and far between, it is recommended you also
+    // explicitly depend on RxJava's latest version for bug fixes and new features.
+    // (see https://github.com/ReactiveX/RxJava/releases for latest 3.x.x version)
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.core:core-ktx:1.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+}
+repositories {
+    mavenCentral()
 }

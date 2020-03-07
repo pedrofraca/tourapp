@@ -11,6 +11,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.github.pedrofraca.tourapp.R;
 import io.github.pedrofraca.tourapp.adapter.TourStageImagesAdapter;
@@ -23,9 +24,9 @@ public class FullScreenImagesActivity extends AppCompatActivity {
     public static final String ATTR_IMAGES="ATTR_IMAGES";
     public static final String ATTR_TITLE="ATTR_TITLE";
 
-    public static void launch(Context callerActivity,ArrayList<String> images,String title){
+    public static void launch(Context callerActivity, List<String> images, String title){
         Intent intent = new Intent(callerActivity,FullScreenImagesActivity.class);
-        intent.putStringArrayListExtra(ATTR_IMAGES,images);
+        intent.putStringArrayListExtra(ATTR_IMAGES,new ArrayList<>(images));
         intent.putExtra(ATTR_TITLE, title);
         callerActivity.startActivity(intent);
     }

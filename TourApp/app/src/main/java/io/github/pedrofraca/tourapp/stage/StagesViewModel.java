@@ -9,14 +9,12 @@ import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.api.ServiceFactory;
-import com.example.api.TourScrappingService;
-import com.example.data.StagesRepositoryImplementation;
-import com.example.data.database.StageDatabaseFactory;
-import com.example.data.model.Resource;
-import com.example.data.model.Stage;
-
 import java.util.List;
+
+import io.github.pedrofraca.data.datasource.StagesRepositoryImplementation;
+import io.github.pedrofraca.data.datasource.api.StagesApiDatasource;
+import io.github.pedrofraca.data.datasource.model.Resource;
+import io.github.pedrofraca.domain.model.StageModel;
 
 public class StagesViewModel extends ViewModel {
 
@@ -27,7 +25,7 @@ public class StagesViewModel extends ViewModel {
         this.repo = repo;
     }
 
-    public LiveData<List<Stage>> stages() {
+    public LiveData<List<StageModel>> stages() {
         return Transformations.map(repo.getStages(), input -> {
             if(input.getStatus()== Resource.Status.ERROR) {
                 error.postValue(input.getError());
@@ -51,7 +49,7 @@ public class StagesViewModel extends ViewModel {
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            StagesRepositoryImplementation repository = new StagesRepositoryImplementation(new ServiceFactory().build(TourScrappingService.class), StageDatabaseFactory.getDatabase(mContext).getStageDao());
+            StagesRepositoryImplementation repository = new StagesRepositoryImplementation(new StagesApiDatasource());
             return (T) new StagesViewModel(repository);
         }
     }

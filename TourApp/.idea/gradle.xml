@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/api" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/domain" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

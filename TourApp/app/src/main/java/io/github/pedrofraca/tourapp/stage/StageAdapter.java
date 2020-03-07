@@ -10,15 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.data.model.Stage;
-
 import java.util.List;
 
+import io.github.pedrofraca.domain.model.StageModel;
 import io.github.pedrofraca.tourapp.R;
 
 public class StageAdapter extends RecyclerView.Adapter<StageAdapter.ViewHolder> {
 
-    private List<Stage> mDataset;
+    private List<StageModel> mDataset;
     private Activity mActivity;
 
     // Provide a reference to the views for each data item
@@ -48,7 +47,7 @@ public class StageAdapter extends RecyclerView.Adapter<StageAdapter.ViewHolder> 
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public StageAdapter(List<Stage> myDataset, Activity activity) {
+    public StageAdapter(List<StageModel> myDataset, Activity activity) {
         mDataset = myDataset;
         mActivity = activity;
     }
@@ -67,12 +66,12 @@ public class StageAdapter extends RecyclerView.Adapter<StageAdapter.ViewHolder> 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Stage tourStage = mDataset.get(position);
-        holder.mStageName.setText(tourStage.getName());
+        StageModel tourStage = mDataset.get(position);
+        holder.mStageName.setText("patata");
         holder.mStageKm.setText(mActivity.getString(R.string.km_string, tourStage.getKm()));
 //        holder.mCardView.setTag(position);
 //        Picasso.with(mActivity).load("http://tourscraping.appspot.com/image?stage="+(position+1)).into(holder.mStageImageView);
-        if(!tourStage.isCompleted()){
+        if(!tourStage.completed()){
             holder.mLeaderBoardView.setVisibility(View.GONE);
             holder.mStageImageCompletedIcon.setVisibility(View.GONE);
         } else {

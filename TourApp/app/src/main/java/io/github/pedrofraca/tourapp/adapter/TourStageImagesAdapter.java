@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.github.pedrofraca.tourapp.activity.FullScreenImagesActivity;
 import uk.co.senab.photoview.PhotoView;
@@ -18,16 +19,16 @@ import uk.co.senab.photoview.PhotoViewAttacher;
  */
 public class TourStageImagesAdapter extends PagerAdapter {
 
-    private ArrayList<String> mImgsURL;
+    private List<String> mImgsURL;
     private String mTitleForFullscreen;
     private boolean mShouldOpenFullScreen = false;
 
-    public TourStageImagesAdapter(ArrayList<String> imgsUrl){
+    public TourStageImagesAdapter(List<String> imgsUrl){
         mImgsURL = imgsUrl;
         mShouldOpenFullScreen = false;
     }
 
-    public TourStageImagesAdapter(ArrayList<String> imgsUrl,String titleForFullScreenActivity){
+    public TourStageImagesAdapter(List<String> imgsUrl, String titleForFullScreenActivity){
         mImgsURL = imgsUrl;
         mTitleForFullscreen = titleForFullScreenActivity;
         mShouldOpenFullScreen = true;
