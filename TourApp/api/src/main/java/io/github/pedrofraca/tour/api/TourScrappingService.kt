@@ -2,7 +2,7 @@ package io.github.pedrofraca.tour.api
 
 import io.github.pedrofraca.tour.api.model.Stage
 import io.github.pedrofraca.tour.api.model.StageClassification
-import io.reactivex.rxjava3.core.Single
+import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 

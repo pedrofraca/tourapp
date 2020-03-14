@@ -1,4 +1,4 @@
-package io.github.pedrofraca.data.datasource
+package io.github.pedrofraca.data.datasource.stage
 
 import androidx.lifecycle.LiveData
 import io.github.pedrofraca.data.datasource.model.Resource

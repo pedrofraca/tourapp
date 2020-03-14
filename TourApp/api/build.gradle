@@ -35,15 +35,13 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.4.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.7.2'
     //rxjava
-    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0-RC8"
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
-    // Because RxAndroid releases are few and far between, it is recommended you also
-    // explicitly depend on RxJava's latest version for bug fixes and new features.
-    // (see https://github.com/ReactiveX/RxJava/releases for latest 3.x.x version)
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.7.2"
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.18'
+
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.2")
     implementation("com.squareup.moshi:moshi:1.9.2")
     implementation 'androidx.core:core-ktx:1.2.0'
+
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

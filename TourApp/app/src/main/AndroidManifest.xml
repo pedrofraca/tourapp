@@ -28,7 +28,7 @@
             android:name=".activity.FullScreenImagesActivity"
             android:parentActivityName=".activity.DetailActivity" />
         <activity
-            android:name=".activity.ClasificationActivity"
+            android:name=".classification.ClassificationActivity"
             android:parentActivityName=".activity.DetailActivity" />
 
 

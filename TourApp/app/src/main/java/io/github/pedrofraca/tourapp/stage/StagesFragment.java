@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import io.github.pedrofraca.tourapp.R;
 
-public class StagesFragment extends Fragment{
+public class StagesFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private StageAdapter mAdapter;
@@ -53,7 +53,7 @@ public class StagesFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
 
         viewModel.stages().observe(getViewLifecycleOwner(), stages -> {
-            mAdapter = new StageAdapter(stages,getActivity());
+            mAdapter = new StageAdapter(stages, requireActivity());
             mRecyclerView.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
             mLoadingProgressBar.setVisibility(View.GONE);

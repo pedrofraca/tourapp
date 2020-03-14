@@ -12,7 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.viewpager.widget.ViewPager;
 
-import io.github.pedrofraca.domain.model.StageModel;
+
 import io.github.pedrofraca.tour.api.model.Stage;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.squareup.picasso.Picasso;
@@ -20,6 +20,8 @@ import com.viewpagerindicator.CirclePageIndicator;
 
 import io.github.pedrofraca.tourapp.R;
 import io.github.pedrofraca.tourapp.adapter.TourStageImagesAdapter;
+import io.github.pedrofraca.tourapp.classification.ClassificationActivity;
+import io.github.pedrofraca.tourapp.stage.StageParcelable;
 
 
 public class DetailActivity extends AppCompatActivity {
@@ -46,15 +48,15 @@ public class DetailActivity extends AppCompatActivity {
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
 
 
-        final StageModel stage = getIntent().getParcelableExtra(ATTR_STAGE);
+        final StageParcelable stage = getIntent().getParcelableExtra(ATTR_STAGE);
         collapsingToolbar.setTitle(stage.getDescription());
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.activity_detail_view_pager);
-        viewPager.setAdapter(new TourStageImagesAdapter(stage.getImages(),stage.getDescription()));
+        //ViewPager viewPager = (ViewPager) findViewById(R.id.activity_detail_view_pager);
+        //viewPager.setAdapter(new TourStageImagesAdapter(stage.getImages(),stage.getDescription()));
 
-        CirclePageIndicator circlePageIndicator = (CirclePageIndicator) findViewById(R.id.activity_detail_page_indicator);
-        circlePageIndicator.setFillColor(getResources().getColor(R.color.color_primary_dark));
-        circlePageIndicator.setViewPager(viewPager);
+//        CirclePageIndicator circlePageIndicator = (CirclePageIndicator) findViewById(R.id.activity_detail_page_indicator);
+//        circlePageIndicator.setFillColor(getResources().getColor(R.color.color_primary_dark));
+//        circlePageIndicator.setViewPager(viewPager);
 
         TextView mStageWinner = (TextView) findViewById(R.id.activity_detail_stage_winner);
         mStageWinner.setText(stage.getWinner());
@@ -76,7 +78,7 @@ public class DetailActivity extends AppCompatActivity {
         clasification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //ClasificationActivity.launch(DetailActivity.this, stage.getStage());
+                ClassificationActivity.launch(DetailActivity.this, stage.getStage());
             }
         });
 

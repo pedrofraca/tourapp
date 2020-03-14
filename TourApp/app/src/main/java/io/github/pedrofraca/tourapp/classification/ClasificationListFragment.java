@@ -1,4 +1,4 @@
-package io.github.pedrofraca.tourapp.fragment;
+package io.github.pedrofraca.tourapp.classification;
 
 
 import android.os.Bundle;
