@@ -199,9 +199,9 @@ class StageDetailsHandler(webapp2.RequestHandler):
 
     def get(self):
         stage_key = self.request.get('stage')
-        stage_details=StageDetails.get_by_id(stage_key)
+        stage_details=Stage.get_by_id(int(stage_key))
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.out.write(json.dumps(stage_details.data))
+        self.response.out.write(json.dumps(json.loads(stage_details.data)))
 
 class StageClasificationHandler(webapp2.RequestHandler):
     def post(self):
@@ -218,10 +218,10 @@ class StageClasificationHandler(webapp2.RequestHandler):
 class ImageHandler(webapp2.RequestHandler):
     def get(self):
         stage_key = self.request.get('stage')
-        stage=StageImages.get_by_id(int(stage_key))
-        if stage:
-            dict = json.loads(stage.data)
-            self.redirect(str(dict[random.randint(0,len(dict))]))
+        images=StageImages.get_by_id(int(stage_key))
+        if images:
+            self.response.headers['Content-Type'] = 'application/json'
+            self.response.out.write(json.dumps(json.loads(images.data)))
         else:
             self.redirect("http://c1.staticflickr.com/9/8256/8701161794_02c1243f4f_n.jpg")
     def post(self):
@@ -231,7 +231,7 @@ class ImageHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/tour', TourHandler),
     ('/details', StageDetailsHandler),
-    ('/tasks', TaskHandler),
+    # ('/tasks', TaskHandler),
     ('/image', ImageHandler),
     ('/clasification', StageClasificationHandler)
 ], debug=True)
