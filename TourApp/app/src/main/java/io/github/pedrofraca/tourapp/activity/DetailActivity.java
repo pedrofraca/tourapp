@@ -10,16 +10,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
-import androidx.viewpager.widget.ViewPager;
 
-
-import io.github.pedrofraca.tour.api.model.Stage;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.squareup.picasso.Picasso;
-import com.viewpagerindicator.CirclePageIndicator;
 
 import io.github.pedrofraca.tourapp.R;
-import io.github.pedrofraca.tourapp.adapter.TourStageImagesAdapter;
 import io.github.pedrofraca.tourapp.classification.ClassificationActivity;
 import io.github.pedrofraca.tourapp.stage.StageParcelable;
 
@@ -27,7 +22,6 @@ import io.github.pedrofraca.tourapp.stage.StageParcelable;
 public class DetailActivity extends AppCompatActivity {
 
     public static final String ATTR_IMG="attr_img";
-
     public static final String ATTR_STAGE = "attr_stage";
 
     @Override
@@ -49,7 +43,7 @@ public class DetailActivity extends AppCompatActivity {
 
 
         final StageParcelable stage = getIntent().getParcelableExtra(ATTR_STAGE);
-        collapsingToolbar.setTitle(stage.getDescription());
+        collapsingToolbar.setTitle(stage.getName());
 
         //ViewPager viewPager = (ViewPager) findViewById(R.id.activity_detail_view_pager);
         //viewPager.setAdapter(new TourStageImagesAdapter(stage.getImages(),stage.getDescription()));

@@ -17,7 +17,7 @@ data class Stage(
         val km: String? = null,
         val imgUrl: String? = null,
         val date: String? = null,
-        val stage: String? = null,
+        val stage: String,
         @Json(name = "avg-speed")
         val averageSpeed: String? = null,
         @Json(name = "start-finish")

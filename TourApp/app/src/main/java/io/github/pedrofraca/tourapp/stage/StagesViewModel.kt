@@ -3,45 +3,64 @@ package io.github.pedrofraca.tourapp.stage
 import android.content.Context
 import android.os.Parcelable
 import androidx.lifecycle.*
-import io.github.pedrofraca.data.datasource.api.StagesApiDataSource
-import io.github.pedrofraca.data.datasource.database.StageDatabaseFactory.getDatabase
-import io.github.pedrofraca.data.datasource.model.Resource
-import io.github.pedrofraca.data.datasource.stage.StageDbDataSource
-import io.github.pedrofraca.data.datasource.stage.StagesRepositoryImplementation
-import io.github.pedrofraca.domain.model.StageModel
+import io.github.pedrofraca.tourapp.framework.datasource.StagesApiDataSource
+import io.github.pedrofraca.tourapp.framework.database.StageDatabaseFactory.getDatabase
+import io.github.pedrofraca.data.datasource.stage.StageRepository
+import io.github.pedrofraca.tourapp.framework.datasource.StageDbDataSource
+import io.github.pedrofraca.data.datasource.stage.StagesRepositoryImpl
+import io.reactivex.Observable
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
 
-class StagesViewModel(private val repo: StagesRepositoryImplementation) : ViewModel() {
-    private val error = MutableLiveData<Throwable?>()
+class StagesViewModel(private val repo: StageRepository) : ViewModel() {
+    private val error = MutableLiveData<Throwable>()
+    private val stagesLiveData = MutableLiveData<List<StageParcelable>>()
+    private val compositeDisposable = CompositeDisposable()
+
     fun stages(): LiveData<List<StageParcelable>> {
-        repo.refresh()
-        return Transformations.map(repo.stages) { input: Resource<List<StageModel>> ->
-            if (input.status === Resource.Status.ERROR) {
-                error.postValue(input.error)
-            }
-            input.getData<List<StageModel>>()?.map {
-                StageParcelable(it.name, it.winner, it.leader, it.images, it.description, it.km, it.imgUrl, it.date)
-            }
-        }
+        val disposable = Observable.concat(Observable.fromCallable { repo.stages }, Observable.fromCallable { repo.refresh() })
+                .filter { it.isNotEmpty() }
+                .firstElement()
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.computation())
+                .map { stagesList ->
+                    val list = ArrayList<StageParcelable>()
+                    stagesList.forEach { stage ->
+                        list.add(StageParcelable(stage.name,
+                                stage.winner,
+                                stage.leader,
+                                stage.images,
+                                stage.description,
+                                stage.km,
+                                stage.imgUrl,
+                                stage.date,
+                                averageSpeed = stage.averageSpeed,
+                                stage = stage.stage))
+                    }
+                    list
+                }
+                .doOnError { error.postValue(it) }
+                .subscribe({ t -> stagesLiveData.postValue(t) }, { t -> error.postValue(t) })
+        compositeDisposable.add(disposable)
+        return stagesLiveData
     }
 
     override fun onCleared() {
         super.onCleared()
-        repo.clear()
+        compositeDisposable.clear()
     }
 
-    fun error(): LiveData<Throwable?> {
+    fun error(): LiveData<Throwable> {
         return error
     }
+}
 
-    class StagesViewModelFactory(private val mContext: Context) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            val repository = StagesRepositoryImplementation(StagesApiDataSource(),
-                    StageDbDataSource(getDatabase(mContext)))
-            return StagesViewModel(repository) as T
-        }
-
+class StagesViewModelFactory(private val mContext: Context) : ViewModelProvider.Factory {
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        val repository = StagesRepositoryImpl(StagesApiDataSource(),
+                StageDbDataSource(getDatabase(mContext)))
+        return StagesViewModel(repository) as T
     }
 }
 
@@ -59,6 +78,6 @@ data class StageParcelable(
         val averageSpeed: String? = null,
         val startFinish: String? = null) : Parcelable {
     fun completed(): Boolean {
-        return winner?.isNotEmpty()?:false
+        return winner?.isNotEmpty() ?: false
     }
 }

@@ -11,5 +11,5 @@ interface TourScrappingService {
     fun stages(): Single<List<Stage?>>
 
     @GET("/clasification")
-    fun getClasificationForStage(@Query("stage") stage: String?): Single<StageClassification?>?
+    fun getClasificationForStage(@Query("stage") stage: String?): Single<StageClassification>
 }

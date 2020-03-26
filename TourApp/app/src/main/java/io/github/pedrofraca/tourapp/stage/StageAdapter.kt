@@ -17,7 +17,7 @@ import io.github.pedrofraca.tourapp.activity.DetailActivity
 
 
 class StageAdapter // Provide a suitable constructor (depends on the kind of dataset)
-(private val mDataset: List<StageParcelable>, private val mActivity: Activity) : RecyclerView.Adapter<StageAdapter.ViewHolder>() {
+(private var mDataset: List<StageParcelable>, private val mActivity: Activity) : RecyclerView.Adapter<StageAdapter.ViewHolder>() {
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -93,6 +93,11 @@ class StageAdapter // Provide a suitable constructor (depends on the kind of dat
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount(): Int {
         return mDataset.size
+    }
+
+    fun updateList(it: List<StageParcelable>) {
+        this.mDataset = it
+        notifyDataSetChanged()
     }
 
 }

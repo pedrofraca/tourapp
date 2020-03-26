@@ -1,4 +1,4 @@
-package io.github.pedrofraca.tourapp.activity;
+package io.github.pedrofraca.tourapp.images;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.pedrofraca.tourapp.R;
-import io.github.pedrofraca.tourapp.adapter.TourStageImagesAdapter;
 
 /**
  * Created by pedrofraca on 14/07/15.
@@ -43,7 +42,7 @@ public class FullScreenImagesActivity extends AppCompatActivity {
         setTitle(getIntent().getStringExtra(ATTR_TITLE));
         ArrayList<String> stringArrayListExtra = getIntent().getStringArrayListExtra(ATTR_IMAGES);
         ViewPager viewPager = (ViewPager) findViewById(R.id.activity_fullscreen_view_pager);
-        viewPager.setAdapter(new TourStageImagesAdapter(stringArrayListExtra));
+        viewPager.setAdapter(new StageImagesAdapter(stringArrayListExtra));
 
         CirclePageIndicator circlePageIndicator = (CirclePageIndicator) findViewById(R.id.activity_fullscreen_page_indicator);
         circlePageIndicator.setFillColor(getResources().getColor(R.color.text_dark_gray));

@@ -4,13 +4,19 @@ import io.github.pedrofraca.data.datasource.ReadOnlyDataSource
 import io.github.pedrofraca.data.datasource.WriteDataSource
 import io.github.pedrofraca.domain.model.StageModel
 
-class StagesRepositoryImplementation(private val apiDataSource: ReadOnlyDataSource<StageModel>,
-                                     private val databaseDataSource: WriteDataSource<StageModel>) : StagesRepository {
+/**
+ * Repository class to manage stages. Which basically will retrieve two data sources.
+ * One to retrieve the Stages and the other one to persists them.
+ */
+class StagesRepositoryImpl(private val apiDataSource: ReadOnlyDataSource<StageModel>,
+                           private val databaseDataSource: WriteDataSource<StageModel>) : StageRepository {
 
-    fun refresh() {
-        apiDataSource.get().forEach {
+    override fun refresh(): List<StageModel> {
+        val stages = apiDataSource.get()
+        stages.forEach {
             databaseDataSource.save(it)
         }
+        return stages;
     }
 
     override val stages: List<StageModel>

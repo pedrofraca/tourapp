@@ -1,7 +1,7 @@
-package io.github.pedrofraca.data.datasource.database
+package io.github.pedrofraca.tourapp.framework.database
 
 import androidx.room.*
-import io.reactivex.Observable
+import io.github.pedrofraca.tourapp.framework.database.StageDbModel
 
 @Dao
 interface StageDao {
@@ -15,5 +15,5 @@ interface StageDao {
     fun delete(stage: StageDbModel?)
 
     @get:Query("SELECT * FROM stage")
-    val stages: Observable<List<StageDbModel>>
+    val stages: List<StageDbModel>
 }

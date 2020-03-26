@@ -1,4 +1,4 @@
-package io.github.pedrofraca.tourapp.adapter;
+package io.github.pedrofraca.tourapp.images;
 
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -7,28 +7,26 @@ import android.view.ViewGroup;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import io.github.pedrofraca.tourapp.activity.FullScreenImagesActivity;
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * Created by pedrofraca on 14/07/15.
  */
-public class TourStageImagesAdapter extends PagerAdapter {
+public class StageImagesAdapter extends PagerAdapter {
 
     private List<String> mImgsURL;
     private String mTitleForFullscreen;
     private boolean mShouldOpenFullScreen = false;
 
-    public TourStageImagesAdapter(List<String> imgsUrl){
+    public StageImagesAdapter(List<String> imgsUrl){
         mImgsURL = imgsUrl;
         mShouldOpenFullScreen = false;
     }
 
-    public TourStageImagesAdapter(List<String> imgsUrl, String titleForFullScreenActivity){
+    public StageImagesAdapter(List<String> imgsUrl, String titleForFullScreenActivity){
         mImgsURL = imgsUrl;
         mTitleForFullscreen = titleForFullScreenActivity;
         mShouldOpenFullScreen = true;

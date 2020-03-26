@@ -1,7 +1,5 @@
 package io.github.pedrofraca.domain.model
 
-import java.util.*
-
 data class StageModel(
         val name: String,
         val winner: String? = null,
@@ -11,7 +9,7 @@ data class StageModel(
         val km: String? = null,
         val imgUrl: String? = null,
         val date: String? = null,
-        val stage: String? = null,
+        val stage: String,
         val averageSpeed: String? = null,
         val startFinish: String? = null) {
 

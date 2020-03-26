@@ -12,4 +12,12 @@ class TourScrappingIntegration {
         val stages = api.stages().blockingGet()
         Assert.assertFalse(stages?.isEmpty() ?: true)
     }
+
+    @Throws(IOException::class)
+    @Test
+    fun classificationEndpoint() {
+        val api = ServiceFactory().build(TourScrappingService::class.java)
+        val stages = api.getClasificationForStage("1").blockingGet()
+        Assert.assertFalse(stages.general.isEmpty())
+    }
 }
