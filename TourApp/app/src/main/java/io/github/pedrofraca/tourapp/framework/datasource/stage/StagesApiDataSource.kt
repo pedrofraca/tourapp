@@ -1,4 +1,4 @@
-package io.github.pedrofraca.tourapp.framework.datasource
+package io.github.pedrofraca.tourapp.framework.datasource.stage
 
 import io.github.pedrofraca.data.datasource.ReadOnlyDataSource
 import io.github.pedrofraca.domain.model.StageModel

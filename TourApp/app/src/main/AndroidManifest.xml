@@ -21,15 +21,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.DetailActivity"
+            android:name=".stage.StageDetailActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".stage.StageActivity" />
         <activity
             android:name=".images.FullScreenImagesActivity"
-            android:parentActivityName=".activity.DetailActivity" />
+            android:parentActivityName=".stage.StageDetailActivity" />
         <activity
             android:name=".classification.ClassificationActivity"
-            android:parentActivityName=".activity.DetailActivity" />
+            android:parentActivityName=".stage.StageDetailActivity" />
 
 
     </application>

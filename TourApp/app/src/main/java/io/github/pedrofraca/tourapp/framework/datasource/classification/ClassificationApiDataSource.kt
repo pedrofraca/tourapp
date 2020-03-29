@@ -1,4 +1,4 @@
-package io.github.pedrofraca.tourapp.framework.datasource
+package io.github.pedrofraca.tourapp.framework.datasource.classification
 
 import io.github.pedrofraca.data.datasource.ReadOnlyDataSourceWithParam
 import io.github.pedrofraca.domain.model.ClassificationModel
@@ -15,7 +15,8 @@ class ClassificationApiDataSource (private val api: TourScrappingService = Servi
                 api.team.map { it.toClassificationModel() },
                 api.general.map { it.toClassificationModel() },
                 api.regularity.map { it.toClassificationModel() },
-                api.stage.map { it.toClassificationModel() })
+                api.stage.map { it.toClassificationModel() },
+                param)
     }
 
 }

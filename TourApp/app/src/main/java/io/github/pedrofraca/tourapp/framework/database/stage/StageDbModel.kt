@@ -1,4 +1,4 @@
-package io.github.pedrofraca.tourapp.framework.database
+package io.github.pedrofraca.tourapp.framework.database.stage
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -7,14 +7,14 @@ import io.github.pedrofraca.domain.model.StageModel
 @Entity(tableName = "stage")
 data class StageDbModel(
         @PrimaryKey
+        var stage: String = "",
         var name: String = "",
         var kms: String? = null,
         var winner: String? = null,
         var leader: String? = null,
         var averageSpeed: String? = null,
         var imgUrl: String? = null,
-        var isCompleted: Boolean = false,
-        var stage: String = "")
+        var isCompleted: Boolean = false)
 
 fun StageDbModel.fromStageModel(model: StageModel): StageDbModel {
     name = model.name

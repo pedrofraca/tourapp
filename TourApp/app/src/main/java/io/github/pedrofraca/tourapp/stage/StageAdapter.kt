@@ -11,9 +11,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import io.github.pedrofraca.domain.model.StageModel
 import io.github.pedrofraca.tourapp.R
-import io.github.pedrofraca.tourapp.activity.DetailActivity
 
 
 class StageAdapter // Provide a suitable constructor (depends on the kind of dataset)
@@ -74,18 +72,18 @@ class StageAdapter // Provide a suitable constructor (depends on the kind of dat
         }
         holder.mCardView.tag = position
         holder.mCardView.setOnClickListener {
-            val intent = Intent(mActivity, DetailActivity::class.java)
+            val intent = Intent(mActivity, StageDetailActivity::class.java)
             // create the transition animation - the images in the layouts
             // of both activities are defined with android:transitionName="robot"
             // create the transition animation - the images in the layouts
             // of both activities are defined with android:transitionName="robot"
-            val p1 = androidx.core.util.Pair.create(holder.mStageImageView as View, DetailActivity.ATTR_IMG)
+            val p1 = androidx.core.util.Pair.create(holder.mStageImageView as View, StageDetailActivity.ATTR_IMG)
             val options: ActivityOptionsCompat = ActivityOptionsCompat
                     .makeSceneTransitionAnimation(mActivity, p1)
 
             val position : Int = it.tag as Int
-            intent.putExtra(DetailActivity.ATTR_IMG, mDataset[position].imgUrl)
-            intent.putExtra(DetailActivity.ATTR_STAGE, mDataset[position])
+            intent.putExtra(StageDetailActivity.ATTR_IMG, mDataset[position].imgUrl)
+            intent.putExtra(StageDetailActivity.ATTR_STAGE, mDataset[position])
             mActivity.startActivity(intent, options.toBundle())
         }
     }

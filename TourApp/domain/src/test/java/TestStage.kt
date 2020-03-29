@@ -4,13 +4,15 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class TestStage {
-    @Test fun testStageIsCompleted() {
+    @Test
+    fun testStageIsCompleted() {
         assertTrue("Stage must be completed if the name of the winner is not null",
-                StageModel(name = "TestStage", winner = "Pedro").completed())
+                StageModel(name = "TestStage", winner = "Pedro", stage = "1").completed())
     }
 
-    @Test fun testStageIsNotCompleted() {
+    @Test
+    fun testStageIsNotCompleted() {
         assertFalse("Stage mustn't be completed if the name of the winner is not null",
-                StageModel(name = "TestStage").completed())
+                StageModel(name = "TestStage", stage = "1").completed())
     }
 }

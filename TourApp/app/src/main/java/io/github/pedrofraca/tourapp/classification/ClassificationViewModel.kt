@@ -8,30 +8,32 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import io.github.pedrofraca.data.datasource.classification.ClassificationRepository
 import io.github.pedrofraca.data.datasource.classification.ClassificationRepositoryImpl
-import io.github.pedrofraca.domain.model.ClassificationModel
-import io.github.pedrofraca.domain.model.StageClassificationModel
-import io.github.pedrofraca.tourapp.framework.datasource.ClassificationApiDataSource
+import io.github.pedrofraca.tourapp.framework.database.TourDatabaseFactory
+import io.github.pedrofraca.tourapp.framework.datasource.classification.ClassificationApiDataSource
+import io.github.pedrofraca.tourapp.framework.datasource.classification.ClassificationDbDataSource
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.parcel.Parcelize
 
-class ClassificationViewModel(private val repo : ClassificationRepository) : ViewModel() {
+class ClassificationViewModel(private val repo: ClassificationRepository) : ViewModel() {
 
     private val mutableStageLiveData = MutableLiveData<StageClassificationModelParcelable>()
     private val compositeDisposable = CompositeDisposable()
 
-    fun getClassificationForStage(stage: String) : LiveData<StageClassificationModelParcelable> {
-        compositeDisposable.add(Observable.fromCallable { repo.getClassificationForStage(stage) }
+    fun getClassificationForStage(stage: String): LiveData<StageClassificationModelParcelable> {
+        compositeDisposable.add(Observable.fromCallable { repo.refreshForStage(stage) }
                 .subscribeOn(Schedulers.io())
-                .subscribe { mutableStageLiveData.postValue(
-                        StageClassificationModelParcelable(
-                                it.mountain.map {  classification -> ClassificationModelParcelable(classification.time, classification.country, classification.team, classification.pos, classification.rider)  },
-                                it.team.map {  classification -> ClassificationModelParcelable(classification.time, classification.country, classification.team, classification.pos, classification.rider)  },
-                                it.general.map {  classification -> ClassificationModelParcelable(classification.time, classification.country, classification.team, classification.pos, classification.rider)  },
-                                it.regularity.map { classification -> ClassificationModelParcelable(classification.time, classification.country, classification.team, classification.pos, classification.rider) },
-                                it.stage.map { classification -> ClassificationModelParcelable(classification.time, classification.country, classification.team, classification.pos, classification.rider) }
-                        )) })
+                .subscribe {
+                    mutableStageLiveData.postValue(
+                            StageClassificationModelParcelable(
+                                    it.mountain.map { classification -> ClassificationModelParcelable(classification.time, classification.country, classification.team, classification.pos, classification.rider) },
+                                    it.team.map { classification -> ClassificationModelParcelable(classification.time, classification.country, classification.team, classification.pos, classification.rider) },
+                                    it.general.map { classification -> ClassificationModelParcelable(classification.time, classification.country, classification.team, classification.pos, classification.rider) },
+                                    it.regularity.map { classification -> ClassificationModelParcelable(classification.time, classification.country, classification.team, classification.pos, classification.rider) },
+                                    it.stageClassification.map { classification -> ClassificationModelParcelable(classification.time, classification.country, classification.team, classification.pos, classification.rider) }
+                            ))
+                })
 
         return mutableStageLiveData
     }
@@ -45,10 +47,10 @@ class ClassificationViewModel(private val repo : ClassificationRepository) : Vie
 
 @Parcelize
 data class ClassificationModelParcelable(var time: String?,
-                               var country: String?,
-                               var team: String?,
-                               var pos: String?,
-                               var rider: String?) : Parcelable
+                                         var country: String?,
+                                         var team: String?,
+                                         var pos: String?,
+                                         var rider: String?) : Parcelable
 
 @Parcelize
 data class StageClassificationModelParcelable(
@@ -58,9 +60,10 @@ data class StageClassificationModelParcelable(
         var regularity: List<ClassificationModelParcelable>,
         var stage: List<ClassificationModelParcelable>) : Parcelable
 
-class ClassificationViewModelFactory(private val mContext: Context) : ViewModelProvider.Factory {
+class ClassificationViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        val repository = ClassificationRepositoryImpl(ClassificationApiDataSource(), null)
+        val repository = ClassificationRepositoryImpl(ClassificationApiDataSource(),
+                ClassificationDbDataSource(TourDatabaseFactory.getDatabase(context)))
         return ClassificationViewModel(repository) as T
     }
 }

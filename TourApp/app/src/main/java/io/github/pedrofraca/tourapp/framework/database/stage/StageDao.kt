@@ -1,7 +1,6 @@
-package io.github.pedrofraca.tourapp.framework.database
+package io.github.pedrofraca.tourapp.framework.database.stage
 
 import androidx.room.*
-import io.github.pedrofraca.tourapp.framework.database.StageDbModel
 
 @Dao
 interface StageDao {

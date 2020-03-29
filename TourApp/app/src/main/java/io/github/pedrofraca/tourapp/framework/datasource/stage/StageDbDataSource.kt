@@ -1,11 +1,11 @@
-package io.github.pedrofraca.tourapp.framework.datasource
+package io.github.pedrofraca.tourapp.framework.datasource.stage
 
 import io.github.pedrofraca.data.datasource.WriteDataSource
 import io.github.pedrofraca.domain.model.StageModel
 import io.github.pedrofraca.tourapp.framework.database.TourDatabase
-import io.github.pedrofraca.tourapp.framework.database.StageDbModel
-import io.github.pedrofraca.tourapp.framework.database.fromStageModel
-import io.github.pedrofraca.tourapp.framework.database.toStageModel
+import io.github.pedrofraca.tourapp.framework.database.stage.StageDbModel
+import io.github.pedrofraca.tourapp.framework.database.stage.fromStageModel
+import io.github.pedrofraca.tourapp.framework.database.stage.toStageModel
 
 class StageDbDataSource(private val db: TourDatabase) : WriteDataSource<StageModel> {
 

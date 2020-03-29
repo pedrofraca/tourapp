@@ -6,4 +6,5 @@ data class StageClassificationModel(
         var team: List<ClassificationModel>,
         var general: List<ClassificationModel>,
         var regularity: List<ClassificationModel>,
-        var stage: List<ClassificationModel>)
+        var stageClassification: List<ClassificationModel>,
+        var stage: String)

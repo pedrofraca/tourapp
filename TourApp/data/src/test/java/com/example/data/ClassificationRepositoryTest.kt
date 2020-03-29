@@ -18,7 +18,7 @@ class ClassificationRepositoryTest {
     fun `test we persists classifications`() {
         every { api.get("1") } returns StageClassificationModel(emptyList(), emptyList(), emptyList(), emptyList(), emptyList())
 
-        repo.getClassificationForStage("1")
+        repo.refreshForStage("1")
 
         verify { api.get("1") }
         verify { db.save(any()) }
