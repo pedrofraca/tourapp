@@ -6,7 +6,7 @@ interface ClassificationRepository {
 
     /**
      * Triggers a network update for the classification for the given stage. Stores the result
-     * in the writrable data source.
+     * in the writable data source.
      */
     fun refreshForStage(stage : String) : StageClassificationModel
 

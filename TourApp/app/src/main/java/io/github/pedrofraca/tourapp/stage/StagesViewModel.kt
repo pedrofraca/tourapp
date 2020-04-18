@@ -3,10 +3,10 @@ package io.github.pedrofraca.tourapp.stage
 import android.content.Context
 import android.os.Parcelable
 import androidx.lifecycle.*
-import io.github.pedrofraca.tourapp.framework.datasource.stage.StagesApiDataSource
-import io.github.pedrofraca.tourapp.framework.database.TourDatabaseFactory.getDatabase
+import com.pedrofraca.tour.framework.datasource.stage.StagesApiDataSource
+import com.pedrofraca.tour.framework.database.TourDatabaseFactory.getDatabase
 import io.github.pedrofraca.data.datasource.stage.StageRepository
-import io.github.pedrofraca.tourapp.framework.datasource.stage.StageDbDataSource
+import com.pedrofraca.tour.framework.datasource.stage.StageDbDataSource
 import io.github.pedrofraca.data.datasource.stage.StagesRepositoryImpl
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable

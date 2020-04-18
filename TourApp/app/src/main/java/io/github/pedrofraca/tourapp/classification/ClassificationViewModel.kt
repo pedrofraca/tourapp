@@ -8,9 +8,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import io.github.pedrofraca.data.datasource.classification.ClassificationRepository
 import io.github.pedrofraca.data.datasource.classification.ClassificationRepositoryImpl
-import io.github.pedrofraca.tourapp.framework.database.TourDatabaseFactory
-import io.github.pedrofraca.tourapp.framework.datasource.classification.ClassificationApiDataSource
-import io.github.pedrofraca.tourapp.framework.datasource.classification.ClassificationDbDataSource
+import com.pedrofraca.tour.framework.database.TourDatabaseFactory
+import com.pedrofraca.tour.framework.datasource.classification.ClassificationApiDataSource
+import com.pedrofraca.tour.framework.datasource.classification.ClassificationDbDataSource
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -22,7 +22,10 @@ class ClassificationViewModel(private val repo: ClassificationRepository) : View
     private val compositeDisposable = CompositeDisposable()
 
     fun getClassificationForStage(stage: String): LiveData<StageClassificationModelParcelable> {
-        compositeDisposable.add(Observable.fromCallable { repo.refreshForStage(stage) }
+        val observable = Observable.concat(Observable.fromCallable { repo.getClassificationForStage(stage) },
+                Observable.fromCallable { repo.refreshForStage(stage) })
+                .filter { it.general.isNotEmpty() }
+                .firstElement()
                 .subscribeOn(Schedulers.io())
                 .subscribe {
                     mutableStageLiveData.postValue(
@@ -33,7 +36,9 @@ class ClassificationViewModel(private val repo: ClassificationRepository) : View
                                     it.regularity.map { classification -> ClassificationModelParcelable(classification.time, classification.country, classification.team, classification.pos, classification.rider) },
                                     it.stageClassification.map { classification -> ClassificationModelParcelable(classification.time, classification.country, classification.team, classification.pos, classification.rider) }
                             ))
-                })
+                }
+
+        compositeDisposable.add(observable)
 
         return mutableStageLiveData
     }
@@ -63,7 +68,7 @@ data class StageClassificationModelParcelable(
 class ClassificationViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         val repository = ClassificationRepositoryImpl(ClassificationApiDataSource(),
-                ClassificationDbDataSource(TourDatabaseFactory.getDatabase(context)))
+                ClassificationDbDataSource(com.pedrofraca.tour.framework.database.TourDatabaseFactory.getDatabase(context)))
         return ClassificationViewModel(repository) as T
     }
 }

@@ -1,6 +1,8 @@
 package io.github.pedrofraca.tourapp.stage
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.text.Html
 import android.util.Log
 import android.view.View
@@ -8,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.TaskStackBuilder
 import androidx.core.view.ViewCompat
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.squareup.picasso.Picasso
@@ -16,7 +19,7 @@ import io.github.pedrofraca.tourapp.classification.ClassificationActivity.Compan
 import io.github.pedrofraca.tourapp.stage.StageDetailActivity
 
 class StageDetailActivity : AppCompatActivity() {
-
+    private lateinit var stage: StageParcelable
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -27,7 +30,7 @@ class StageDetailActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         val collapsingToolbar = findViewById<View>(R.id.collapsing_toolbar) as CollapsingToolbarLayout
-        val stage: StageParcelable = intent.getParcelableExtra(ATTR_STAGE)
+        stage = intent.getParcelableExtra(ATTR_STAGE)
         collapsingToolbar.title = stage.name
 
         //ViewPager viewPager = (ViewPager) findViewById(R.id.activity_detail_view_pager);
@@ -55,6 +58,38 @@ class StageDetailActivity : AppCompatActivity() {
 //        AdView mAdView = (AdView) findViewById(R.id.adView);
 //        AdRequest adRequest = new AdRequest.Builder().build();
 //        mAdView.loadAd(adRequest);
+    }
+
+//    override fun supportShouldUpRecreateTask(targetIntent: Intent): Boolean {
+//        return true
+//    }
+//
+//    override fun onPrepareSupportNavigateUpTaskStack(builder: TaskStackBuilder) {
+//        super.onPrepareSupportNavigateUpTaskStack(builder)
+////        val albumId = intent.getLongExtra(TrackActivity.EXTRA_ALBUM_ID, -1L)
+////        val albumIntent = AlbumActivity.create(this, albumId)
+//        builder.editIntentAt(builder.intentCount - 1)?.putExtra(ATTR_STAGE, stage)
+//        Log.d("patata", "on save")
+//    }
+//
+//    override fun getSupportParentActivityIntent(): Intent? {
+//        val intent = Intent()
+//        intent.putExtra(ATTR_STAGE, stage)
+//        return intent
+//    }
+
+
+
+
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        Log.d("patata", "on save")
+        super.onSaveInstanceState(outState, outPersistentState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        Log.d("patata", "on restore")
+        super.onRestoreInstanceState(savedInstanceState)
     }
 
     companion object {

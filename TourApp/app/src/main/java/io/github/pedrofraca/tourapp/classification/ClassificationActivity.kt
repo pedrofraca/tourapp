@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import io.github.pedrofraca.tourapp.R
+import io.github.pedrofraca.tourapp.stage.StageDetailActivity
 
 class ClassificationActivity : AppCompatActivity() {
     private lateinit var viewModel: ClassificationViewModel
@@ -45,6 +46,13 @@ class ClassificationActivity : AppCompatActivity() {
                     tabLayout.setupWithViewPager(mViewPager);
 
                 })
+    }
+
+    override fun getSupportParentActivityIntent(): Intent? {
+        val intent = Intent()
+        intent.setClass(this, StageDetailActivity.javaClass)
+        intent.putExtra(StageDetailActivity.ATTR_STAGE, "stage")
+        return intent
     }
 
     internal class Adapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
