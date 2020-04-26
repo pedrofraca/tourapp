@@ -1,0 +1,12 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    api project(':domain')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    testImplementation 'junit:junit:4.13'
+    testImplementation "io.mockk:mockk:1.9.3"
+}
+repositories {
+    mavenCentral()
+}

@@ -3,16 +3,15 @@
     android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivityFragment">
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-6999088438037061/1798477435">
-    </com.google.android.gms.ads.AdView>
-    <android.support.v7.widget.RecyclerView
+    <!--<com.google.android.gms.ads.AdView-->
+        <!--android:id="@+id/adView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--ads:adSize="BANNER"-->
+        <!--ads:adUnitId="ca-app-pub-6999088438037061/1798477435">-->
+    <!--</com.google.android.gms.ads.AdView>-->
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/adView"
         android:id="@+id/my_recycler_view"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
