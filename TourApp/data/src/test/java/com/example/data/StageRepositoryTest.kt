@@ -27,7 +27,7 @@ class StageRepositoryTest {
 
     @Test
     fun `test non empty response saves items`() {
-        every { api.get() } returns listOf(StageModel("patata"))
+        every { api.get() } returns listOf(StageModel("patata", stage = "1"))
 
         repo.refresh()
 
