@@ -2,6 +2,7 @@ package com.example.data
 
 import io.github.pedrofraca.data.datasource.ReadOnlyDataSourceWithParam
 import io.github.pedrofraca.data.datasource.WriteDataSource
+import io.github.pedrofraca.data.datasource.WriteDataSourceSingleWithParams
 import io.github.pedrofraca.data.datasource.classification.ClassificationRepositoryImpl
 import io.github.pedrofraca.domain.model.StageClassificationModel
 import io.mockk.every
@@ -11,12 +12,12 @@ import org.junit.Test
 
 class ClassificationRepositoryTest {
     private val api = mockk<ReadOnlyDataSourceWithParam<StageClassificationModel, String>>(relaxed = true)
-    private val db = mockk<WriteDataSource<StageClassificationModel>>(relaxed = true)
+    private val db = mockk<WriteDataSourceSingleWithParams<StageClassificationModel, String>>(relaxed = true)
     private val repo = ClassificationRepositoryImpl(api, db)
 
     @Test
     fun `test we persists classifications`() {
-        every { api.get("1") } returns StageClassificationModel(emptyList(), emptyList(), emptyList(), emptyList(), emptyList())
+        every { api.get("1") } returns StageClassificationModel(emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), stage = "1")
 
         repo.refreshForStage("1")
 
