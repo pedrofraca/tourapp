@@ -24,7 +24,6 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
-        android:layout_above="@+id/adView"
         android:id="@+id/activity_fullscreen_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

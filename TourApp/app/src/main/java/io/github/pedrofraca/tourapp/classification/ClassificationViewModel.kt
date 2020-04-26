@@ -6,11 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import io.github.pedrofraca.data.datasource.classification.ClassificationRepository
-import io.github.pedrofraca.data.datasource.classification.ClassificationRepositoryImpl
-import com.pedrofraca.tour.framework.database.TourDatabaseFactory
 import com.pedrofraca.tour.framework.datasource.classification.ClassificationApiDataSource
 import com.pedrofraca.tour.framework.datasource.classification.ClassificationDbDataSource
+import io.github.pedrofraca.data.datasource.classification.ClassificationRepository
+import io.github.pedrofraca.data.datasource.classification.ClassificationRepositoryImpl
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

@@ -33,6 +33,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.2.0'
 
     api project(path: ':data')
+    api project(path: ':api')
 
     //ROOM
     api "androidx.room:room-runtime:2.2.5"
