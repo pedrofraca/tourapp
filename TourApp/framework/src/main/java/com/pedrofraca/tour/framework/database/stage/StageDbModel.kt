@@ -7,7 +7,7 @@ import io.github.pedrofraca.domain.model.StageModel
 @Entity(tableName = "stage")
 data class StageDbModel(
         @PrimaryKey
-        var stage: String = "",
+        var stage: Int = -1,
         var name: String = "",
         var kms: String? = null,
         var winner: String? = null,

@@ -1,10 +1,10 @@
 package com.pedrofraca.tour.framework.datasource.classification
 
-import io.github.pedrofraca.data.datasource.WriteDataSourceSingleWithParams
+import io.github.pedrofraca.data.datasource.WriteDataSourceWithFilter
 import io.github.pedrofraca.domain.model.ClassificationModel
 import io.github.pedrofraca.domain.model.StageClassificationModel
 
-class ClassificationDbDataSource(private val db: com.pedrofraca.tour.framework.database.TourDatabase) : WriteDataSourceSingleWithParams<StageClassificationModel, String> {
+class ClassificationDbDataSource(private val db: com.pedrofraca.tour.framework.database.TourDatabase) : WriteDataSourceWithFilter<StageClassificationModel, String> {
 
     enum class ClassificationType(type : String) {
         STAGE("stage"),
@@ -50,5 +50,9 @@ class ClassificationDbDataSource(private val db: com.pedrofraca.tour.framework.d
                     team = it.team,
                     type = type))
         }
+    }
+
+    override fun getAll(): List<StageClassificationModel> {
+        TODO("Not yet implemented")
     }
 }

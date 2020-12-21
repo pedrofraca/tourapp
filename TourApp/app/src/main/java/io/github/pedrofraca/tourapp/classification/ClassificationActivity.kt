@@ -31,7 +31,7 @@ class ClassificationActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this,
                 ClassificationViewModelFactory(this)).get(ClassificationViewModel::class.java)
 
-        viewModel.getClassificationForStage(intent.extras?.getString(ATTR_STAGE)?:"")
+        viewModel.getClassificationForStage(intent.extras?.getInt(ATTR_STAGE).toString())
                 .observe(this, androidx.lifecycle.Observer {
                     val adapter = Adapter(supportFragmentManager);
                     adapter.addFragment( ClassificationListFragment().newInstance(ArrayList(it.stage)), getString(R.string.stage));
@@ -80,7 +80,7 @@ class ClassificationActivity : AppCompatActivity() {
     companion object {
         const val ATTR_STAGE = "attr_stage"
         @JvmStatic
-        fun launch(callerActivity: Activity, stage: String?) {
+        fun launch(callerActivity: Activity, stage: Int?) {
             val intent = Intent(callerActivity, ClassificationActivity::class.java)
             intent.putExtra(ATTR_STAGE, stage)
             callerActivity.startActivity(intent)

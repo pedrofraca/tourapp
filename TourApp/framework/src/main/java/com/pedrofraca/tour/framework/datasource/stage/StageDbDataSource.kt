@@ -11,7 +11,7 @@ class StageDbDataSource(private val db: com.pedrofraca.tour.framework.database.T
         db.stageDao.insert(com.pedrofraca.tour.framework.database.stage.StageDbModel().fromStageModel(item))
     }
 
-    override fun get(): List<StageModel> {
+    override fun getAll(): List<StageModel> {
         return db.stageDao.stages.map {
             it.toStageModel()
         }

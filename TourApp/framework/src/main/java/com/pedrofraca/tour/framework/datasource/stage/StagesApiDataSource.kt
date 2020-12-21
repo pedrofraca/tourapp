@@ -9,7 +9,7 @@ import io.github.pedrofraca.tour.api.TourScrappingService
  * Data source connecting to the API and mapping the result to the domain
  */
 class StagesApiDataSource(private val apiService: TourScrappingService = ServiceFactory().build(TourScrappingService::class.java)) : ReadOnlyDataSource<StageModel> {
-    override fun get(): List<StageModel> {
+    override fun getAll(): List<StageModel> {
         return apiService.stages().blockingGet()
                 .map {
                     StageModel(it?.name ?: "",
@@ -18,7 +18,7 @@ class StagesApiDataSource(private val apiService: TourScrappingService = Service
                             leader = it?.leader,
                             km = it?.km,
                             averageSpeed = it?.averageSpeed,
-                            stage = it?.stage?:"")
+                            stage = it?.stage?.toInt()?:-1)
                 }
     }
 }

@@ -36,7 +36,7 @@ class StagesViewModel(private val repo: StageRepository) : ViewModel() {
                                 stage.imgUrl,
                                 stage.date,
                                 averageSpeed = stage.averageSpeed,
-                                stage = stage.stage))
+                                stage = stage.stage.toInt()?:-1))
                     }
                     list
                 }
@@ -74,7 +74,7 @@ data class StageParcelable(
         val km: String? = null,
         val imgUrl: String? = null,
         val date: String? = null,
-        val stage: String? = null,
+        val stage: Int? = null,
         val averageSpeed: String? = null,
         val startFinish: String? = null) : Parcelable {
     fun completed(): Boolean {
