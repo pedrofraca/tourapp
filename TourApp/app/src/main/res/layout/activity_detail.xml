@@ -80,8 +80,8 @@
                         android:textColor="@android:color/black"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-                    <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/activity_detail_view_pager"
+                    <ImageView
+                        android:id="@+id/stage_profile"
                         android:layout_width="match_parent"
                         android:layout_height="200dp" />
 

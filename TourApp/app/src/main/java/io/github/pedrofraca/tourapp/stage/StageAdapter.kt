@@ -21,27 +21,17 @@ class StageAdapter // Provide a suitable constructor (depends on the kind of dat
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        var mLeaderBoardView: View
-        var mStageName: TextView
-        var mStageWinner: TextView
-        var mStageLeader: TextView
-        var mStageKm: TextView
-        var mCardView: CardView
+        var mLeaderBoardView: View = v.findViewById(R.id.item_tour_leader_board)
+        var mStageName: TextView = v.findViewById<View>(R.id.item_tour_stage_title) as TextView
+        var mStageWinner: TextView = v.findViewById<View>(R.id.item_tour_stage_winner) as TextView
+        var mStageLeader: TextView = v.findViewById<View>(R.id.item_tour_stage_leader) as TextView
+        var mStageKm: TextView = v.findViewById<View>(R.id.item_tour_stage_km) as TextView
+        var mCardView: CardView = v.findViewById<View>(R.id.item_tour_card_view) as CardView
 
         // each data item is just a string in this case
-        var mStageImageView: ImageView
-        var mStageImageCompletedIcon: ImageView
+        var mStageImageView: ImageView = v.findViewById<View>(R.id.item_tour_stage_image) as ImageView
+        var mStageImageCompletedIcon: ImageView = v.findViewById<View>(R.id.item_tour_stage_done_icon) as ImageView
 
-        init {
-            mStageImageView = v.findViewById<View>(R.id.item_tour_stage_image) as ImageView
-            mStageImageCompletedIcon = v.findViewById<View>(R.id.item_tour_stage_done_icon) as ImageView
-            mStageName = v.findViewById<View>(R.id.item_tour_stage_title) as TextView
-            mStageWinner = v.findViewById<View>(R.id.item_tour_stage_winner) as TextView
-            mStageLeader = v.findViewById<View>(R.id.item_tour_stage_leader) as TextView
-            mStageKm = v.findViewById<View>(R.id.item_tour_stage_km) as TextView
-            mLeaderBoardView = v.findViewById(R.id.item_tour_leader_board)
-            mCardView = v.findViewById<View>(R.id.item_tour_card_view) as CardView
-        }
     }
 
     // Create new views (invoked by the layout manager)

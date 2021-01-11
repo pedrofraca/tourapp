@@ -2,6 +2,7 @@ package com.pedrofraca.tour.framework.database.stage
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
 import io.github.pedrofraca.domain.model.StageModel
 
 @Entity(tableName = "stage")
@@ -12,9 +13,23 @@ data class StageDbModel(
         var kms: String? = null,
         var winner: String? = null,
         var leader: String? = null,
+        var images : List<String>? = null,
         var averageSpeed: String? = null,
         var imgUrl: String? = null,
         var isCompleted: Boolean = false)
+
+
+class StringListConverter {
+    @TypeConverter
+    fun fromString(stringListString: String): List<String> {
+        return stringListString.split(",").map { it }
+    }
+
+    @TypeConverter
+    fun toString(stringList: List<String>): String {
+        return stringList.joinToString(separator = ",")
+    }
+}
 
 fun StageDbModel.fromStageModel(model: StageModel): StageDbModel {
     name = model.name
@@ -22,6 +37,7 @@ fun StageDbModel.fromStageModel(model: StageModel): StageDbModel {
     winner = model.winner
     leader = model.leader
     averageSpeed = model.averageSpeed
+    images = model.images
     imgUrl = model.imgUrl
     isCompleted = model.completed()
     stage = model.stage
@@ -33,6 +49,7 @@ fun StageDbModel.toStageModel(): StageModel {
             km = kms,
             winner = winner,
             leader = leader,
+            images = images,
             averageSpeed = averageSpeed,
             imgUrl = imgUrl,
             stage = stage)

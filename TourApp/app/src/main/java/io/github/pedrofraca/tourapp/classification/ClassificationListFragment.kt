@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import io.github.pedrofraca.tourapp.R
-import kotlinx.android.synthetic.main.fragment_clasification.*
+import io.github.pedrofraca.tourapp.databinding.FragmentClasificationBinding
 
 
 class ClassificationListFragment : Fragment() {
+
+    private var binding: FragmentClasificationBinding? = null
 
     fun newInstance(dataSet: ArrayList<ClassificationModelParcelable?>?): ClassificationListFragment {
         val fragment = ClassificationListFragment()
@@ -22,21 +23,23 @@ class ClassificationListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_clasification, container, false)
+        binding = FragmentClasificationBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        my_recycler_view.setHasFixedSize(true)
-        my_recycler_view.layoutManager = LinearLayoutManager(activity)
+
+        binding?.myRecyclerView?.setHasFixedSize(true)
+        binding?.myRecyclerView?.layoutManager = LinearLayoutManager(activity)
 
         val args = arguments
 
         if (args != null) {
             val parcelableArrayList: ArrayList<ClassificationModelParcelable> = args.getParcelableArrayList(ATTR_DATASET)
                     ?: ArrayList(emptyList<ClassificationModelParcelable>())
-            my_recycler_view.adapter = ClassificationAdapter(parcelableArrayList)
+            binding?.myRecyclerView?.adapter = ClassificationAdapter(parcelableArrayList)
         }
 
     }
