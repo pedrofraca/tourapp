@@ -5,44 +5,44 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import io.github.pedrofraca.tourapp.R
-import kotlinx.android.synthetic.main.fragment_stages.*
+import io.github.pedrofraca.tourapp.databinding.FragmentStagesBinding
 
 class StagesFragment : Fragment() {
     private lateinit var mAdapter: StageAdapter
-    private lateinit var viewModel: StagesViewModel
+    private val viewModel: StagesViewModel by viewModels { StagesViewModelFactory(requireContext()) }
+    private var binding: FragmentStagesBinding? = null
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_stages, container, false)
-        viewModel = ViewModelProviders.of(this,
-                StagesViewModelFactory(requireContext())).get(StagesViewModel::class.java)
 
-        return rootView
+        binding = FragmentStagesBinding.inflate(inflater, container, false)
+
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         mAdapter = StageAdapter(emptyList(), requireActivity())
-        my_recycler_view.setHasFixedSize(true)
-        my_recycler_view.layoutManager = LinearLayoutManager(activity)
-        my_recycler_view.adapter = mAdapter
+        binding?.myRecyclerView?.setHasFixedSize(true)
+        binding?.myRecyclerView?.layoutManager = LinearLayoutManager(activity)
+        binding?.myRecyclerView?.adapter = mAdapter
 
         viewModel.stages().observe(viewLifecycleOwner, Observer {
             mAdapter.updateList(it)
-            stages_loading.visibility = View.GONE
+            binding?.stagesLoading?.visibility = View.GONE
         })
 
         viewModel.error().observe(viewLifecycleOwner, Observer { throwable: Throwable -> showErrorMessage(throwable.message) })
     }
 
     private fun showErrorMessage(error: String?) {
-        stages_error_message.visibility = View.VISIBLE
-        activity_main_text_message.text = error
+        binding?.stagesErrorMessage?.visibility = View.VISIBLE
+        binding?.activityMainTextMessage?.text = error
     }
 
     companion object {

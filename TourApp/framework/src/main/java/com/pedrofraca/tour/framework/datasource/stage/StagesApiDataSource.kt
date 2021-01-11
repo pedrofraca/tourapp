@@ -16,6 +16,7 @@ class StagesApiDataSource(private val apiService: TourScrappingService = Service
                             winner = it?.winner,
                             imgUrl = it?.images?.get(0),
                             leader = it?.leader,
+                            images = it?.images,
                             km = it?.km,
                             averageSpeed = it?.averageSpeed,
                             stage = it?.stage?.toInt()?:-1)

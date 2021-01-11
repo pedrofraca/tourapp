@@ -36,7 +36,7 @@ class StagesViewModel(private val repo: StageRepository) : ViewModel() {
                                 stage.imgUrl,
                                 stage.date,
                                 averageSpeed = stage.averageSpeed,
-                                stage = stage.stage.toInt()?:-1))
+                                stage = stage.stage))
                     }
                     list
                 }

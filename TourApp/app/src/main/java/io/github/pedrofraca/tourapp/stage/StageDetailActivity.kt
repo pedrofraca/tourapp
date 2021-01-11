@@ -1,6 +1,5 @@
 package io.github.pedrofraca.tourapp.stage
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.text.Html
@@ -10,13 +9,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.app.TaskStackBuilder
 import androidx.core.view.ViewCompat
+import androidx.viewpager.widget.ViewPager
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.squareup.picasso.Picasso
+import com.viewpagerindicator.CirclePageIndicator
 import io.github.pedrofraca.tourapp.R
 import io.github.pedrofraca.tourapp.classification.ClassificationActivity.Companion.launch
-import io.github.pedrofraca.tourapp.stage.StageDetailActivity
 
 class StageDetailActivity : AppCompatActivity() {
     private lateinit var stage: StageParcelable
@@ -28,17 +27,13 @@ class StageDetailActivity : AppCompatActivity() {
         Picasso.with(this).load(intent.getStringExtra(ATTR_IMG)).into(mTourImageView)
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val collapsingToolbar = findViewById<View>(R.id.collapsing_toolbar) as CollapsingToolbarLayout
         stage = intent.getParcelableExtra(ATTR_STAGE)
         collapsingToolbar.title = stage.name
 
-        //ViewPager viewPager = (ViewPager) findViewById(R.id.activity_detail_view_pager);
-        //viewPager.setAdapter(new TourStageImagesAdapter(stage.getImages(),stage.getDescription()));
+        val stageProfileImageView = findViewById<ImageView>(R.id.stage_profile)
 
-//        CirclePageIndicator circlePageIndicator = (CirclePageIndicator) findViewById(R.id.activity_detail_page_indicator);
-//        circlePageIndicator.setFillColor(getResources().getColor(R.color.color_primary_dark));
-//        circlePageIndicator.setViewPager(viewPager);
         val mStageWinner = findViewById<View>(R.id.activity_detail_stage_winner) as TextView
         mStageWinner.text = stage.winner
         val mStageDetails = findViewById<View>(R.id.activity_detail_stage_details) as TextView
@@ -49,11 +44,11 @@ class StageDetailActivity : AppCompatActivity() {
         } else {
             mStageDetails.text = getString(R.string.details_info_simple, stage.km)
         }
-        val clasification = findViewById<View>(R.id.activity_detail_clasification_button)
+        val classification = findViewById<View>(R.id.activity_detail_clasification_button)
         if (!stage.completed()) {
-            clasification.visibility = View.GONE
+            classification.visibility = View.GONE
         }
-        clasification.setOnClickListener { launch(this@StageDetailActivity, stage.stage) }
+        classification.setOnClickListener { launch(this@StageDetailActivity, stage.stage) }
 
 //        AdView mAdView = (AdView) findViewById(R.id.adView);
 //        AdRequest adRequest = new AdRequest.Builder().build();

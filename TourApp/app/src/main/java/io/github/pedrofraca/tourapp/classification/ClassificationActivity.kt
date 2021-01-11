@@ -4,11 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
@@ -16,7 +18,7 @@ import io.github.pedrofraca.tourapp.R
 import io.github.pedrofraca.tourapp.stage.StageDetailActivity
 
 class ClassificationActivity : AppCompatActivity() {
-    private lateinit var viewModel: ClassificationViewModel
+    private val viewModel: ClassificationViewModel by viewModels { ClassificationViewModelFactory(this) }
     private var mViewPager: ViewPager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,9 +29,6 @@ class ClassificationActivity : AppCompatActivity() {
         val ab = supportActionBar
         ab!!.setDisplayHomeAsUpEnabled(true)
         mViewPager = findViewById<View>(R.id.viewpager) as ViewPager
-
-        viewModel = ViewModelProviders.of(this,
-                ClassificationViewModelFactory(this)).get(ClassificationViewModel::class.java)
 
         viewModel.getClassificationForStage(intent.extras?.getInt(ATTR_STAGE).toString())
                 .observe(this, androidx.lifecycle.Observer {
