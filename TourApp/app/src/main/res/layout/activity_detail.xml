@@ -54,15 +54,6 @@
             android:orientation="vertical"
             android:paddingTop="24dp">
 
-            <!--<com.google.android.gms.ads.AdView-->
-                <!--android:id="@+id/adView"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--ads:adSize="BANNER"-->
-                <!--ads:adUnitId="ca-app-pub-6999088438037061/7845011034">-->
-            <!--</com.google.android.gms.ads.AdView>-->
-
-
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,7 +67,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/stage_images"
+                        android:text="@string/profile_image"
                         android:textColor="@android:color/black"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 

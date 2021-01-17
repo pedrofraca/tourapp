@@ -13,9 +13,9 @@ data class StageDbModel(
         var kms: String? = null,
         var winner: String? = null,
         var leader: String? = null,
-        var images : List<String>? = null,
         var averageSpeed: String? = null,
         var imgUrl: String? = null,
+        var profileImgUrl: String? = null,
         var isCompleted: Boolean = false)
 
 
@@ -37,7 +37,7 @@ fun StageDbModel.fromStageModel(model: StageModel): StageDbModel {
     winner = model.winner
     leader = model.leader
     averageSpeed = model.averageSpeed
-    images = model.images
+    profileImgUrl = model.profileImgUrl
     imgUrl = model.imgUrl
     isCompleted = model.completed()
     stage = model.stage
@@ -49,7 +49,8 @@ fun StageDbModel.toStageModel(): StageModel {
             km = kms,
             winner = winner,
             leader = leader,
-            images = images,
+            images = emptyList(),
+            profileImgUrl = profileImgUrl,
             averageSpeed = averageSpeed,
             imgUrl = imgUrl,
             stage = stage)

@@ -10,7 +10,7 @@ import com.pedrofraca.tour.framework.database.stage.StageDao
 import com.pedrofraca.tour.framework.database.stage.StageDbModel
 import com.pedrofraca.tour.framework.database.stage.StringListConverter
 
-@Database(entities = [StageDbModel::class, ClassificationDbModel::class], version = 9)
+@Database(entities = [StageDbModel::class, ClassificationDbModel::class], version = 10)
 @TypeConverters(StringListConverter::class)
 abstract class TourDatabase : RoomDatabase() {
     abstract val stageDao: StageDao

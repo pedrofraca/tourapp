@@ -13,7 +13,7 @@ import io.github.pedrofraca.data.datasource.classification.ClassificationReposit
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 class ClassificationViewModel(private val repo: ClassificationRepository) : ViewModel() {
 
