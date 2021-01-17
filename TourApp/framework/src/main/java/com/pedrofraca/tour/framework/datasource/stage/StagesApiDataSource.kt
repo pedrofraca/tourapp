@@ -15,6 +15,7 @@ class StagesApiDataSource(private val apiService: TourScrappingService = Service
                     StageModel(it?.name ?: "",
                             winner = it?.winner,
                             imgUrl = it?.images?.get(0),
+                            profileImgUrl = it?.images?.get(1),
                             leader = it?.leader,
                             images = it?.images,
                             km = it?.km,

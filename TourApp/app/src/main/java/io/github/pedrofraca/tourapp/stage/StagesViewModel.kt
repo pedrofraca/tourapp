@@ -11,7 +11,7 @@ import io.github.pedrofraca.data.datasource.stage.StagesRepositoryImpl
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 class StagesViewModel(private val repo: StageRepository) : ViewModel() {
     private val error = MutableLiveData<Throwable>()
@@ -30,7 +30,7 @@ class StagesViewModel(private val repo: StageRepository) : ViewModel() {
                         list.add(StageParcelable(stage.name,
                                 stage.winner,
                                 stage.leader,
-                                stage.images,
+                                stage.profileImgUrl,
                                 stage.description,
                                 stage.km,
                                 stage.imgUrl,
@@ -69,7 +69,7 @@ data class StageParcelable(
         val name: String,
         val winner: String? = null,
         val leader: String? = null,
-        val images: List<String>? = null,
+        val profileImgUrl: String? = null,
         val description: String? = null,
         val km: String? = null,
         val imgUrl: String? = null,

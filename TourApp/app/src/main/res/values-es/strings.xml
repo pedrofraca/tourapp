@@ -16,5 +16,5 @@
     <string name="mountain">Montaña</string>
     <string name="team">Equipo</string>
     <string name="regularity">Regularidad</string>
-    <string name="stage_images">Imágenes de la etapa</string>
+    <string name="profile_image">Perfil de la etapa</string>
 </resources>
