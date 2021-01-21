@@ -6,12 +6,12 @@ import io.github.pedrofraca.domain.model.StageClassificationModel
 
 class ClassificationDbDataSource(private val db: com.pedrofraca.tour.framework.database.TourDatabase) : WriteDataSourceWithFilter<StageClassificationModel, String> {
 
-    enum class ClassificationType(type : String) {
-        STAGE("stage"),
-        REGULARITY("regularity"),
-        MOUNTAIN("mountain"),
-        GENERAL("general"),
-        TEAM("team")
+    enum class ClassificationType {
+        STAGE,
+        REGULARITY,
+        MOUNTAIN,
+        GENERAL,
+        TEAM
     }
 
     override fun get(param: String): StageClassificationModel {

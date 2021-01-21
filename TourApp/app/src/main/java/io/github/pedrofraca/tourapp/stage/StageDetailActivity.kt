@@ -37,7 +37,7 @@ class StageDetailActivity : AppCompatActivity() {
         if (stage.completed()) {
             mStageDetails.text = Html.fromHtml(getString(R.string.details_info, stage.km,
                     stage.averageSpeed,
-                    stage.leader))
+                    stage.leader), Html.FROM_HTML_OPTION_USE_CSS_COLORS)
         } else {
             mStageDetails.text = getString(R.string.details_info_simple, stage.km)
         }
