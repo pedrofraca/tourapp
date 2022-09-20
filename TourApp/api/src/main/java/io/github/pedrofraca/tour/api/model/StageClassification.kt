@@ -8,4 +8,4 @@ data class StageClassification(
         var team: List<Classification>,
         var general: List<Classification>,
         var regularity: List<Classification>,
-        var stage: List<Classification>)
+        var stageClassification: List<Classification>)

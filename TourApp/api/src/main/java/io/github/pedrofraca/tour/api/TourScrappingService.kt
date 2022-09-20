@@ -4,12 +4,12 @@ import io.github.pedrofraca.tour.api.model.Stage
 import io.github.pedrofraca.tour.api.model.StageClassification
 import io.reactivex.Single
 import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.Path
 
 interface TourScrappingService {
-    @GET("/tour")
+    @GET("/api/stage")
     fun stages(): Single<List<Stage?>>
 
-    @GET("/clasification")
-    fun getClasificationForStage(@Query("stage") stage: String?): Single<StageClassification>
+    @GET("/api/stage/{stage}/classification")
+    fun getClassificationForStage(@Path("stage") stage: String?): Single<StageClassification>
 }

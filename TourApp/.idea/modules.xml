@@ -4,8 +4,17 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TourApp.iml" filepath="$PROJECT_DIR$/TourApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/api/TourApp.api.iml" filepath="$PROJECT_DIR$/.idea/modules/api/TourApp.api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api/TourApp.api.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/api/TourApp.api.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api/TourApp.api.main.iml" filepath="$PROJECT_DIR$/.idea/modules/api/TourApp.api.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api/TourApp.api.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/api/TourApp.api.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TourApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TourApp.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TourApp.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TourApp.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TourApp.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TourApp.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TourApp.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TourApp.app.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/framework/TourApp.framework.iml" filepath="$PROJECT_DIR$/.idea/modules/framework/TourApp.framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/framework/TourApp.framework.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/framework/TourApp.framework.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/framework/TourApp.framework.main.iml" filepath="$PROJECT_DIR$/.idea/modules/framework/TourApp.framework.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/framework/TourApp.framework.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/framework/TourApp.framework.unitTest.iml" />
     </modules>
   </component>
 </project>

@@ -13,6 +13,7 @@
 
         <activity
             android:name=".stage.StageActivity"
+            android:exported="true"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,12 +21,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:exported="false"
             android:name=".stage.StageDetailActivity"
             android:parentActivityName=".stage.StageActivity" />
         <activity
+            android:exported="false"
             android:name=".images.FullScreenImagesActivity"
             android:parentActivityName=".stage.StageDetailActivity" />
         <activity
+            android:exported="false"
             android:name=".classification.ClassificationActivity"
             android:parentActivityName=".stage.StageDetailActivity" />
 

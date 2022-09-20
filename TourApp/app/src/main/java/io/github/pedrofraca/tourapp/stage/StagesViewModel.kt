@@ -57,7 +57,7 @@ class StagesViewModel(private val repo: StageRepository) : ViewModel() {
 }
 
 class StagesViewModelFactory(private val mContext: Context) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         val repository = StagesRepositoryImpl(StagesApiDataSource(),
                 StageDbDataSource(getDatabase(mContext)))
         return StagesViewModel(repository) as T

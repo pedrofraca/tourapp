@@ -65,7 +65,7 @@ data class StageClassificationModelParcelable(
         var stage: List<ClassificationModelParcelable>) : Parcelable
 
 class ClassificationViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         val repository = ClassificationRepositoryImpl(ClassificationApiDataSource(),
                 ClassificationDbDataSource(com.pedrofraca.tour.framework.database.TourDatabaseFactory.getDatabase(context)))
         return ClassificationViewModel(repository) as T

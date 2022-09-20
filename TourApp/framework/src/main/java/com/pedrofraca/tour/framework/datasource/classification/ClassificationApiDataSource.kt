@@ -9,13 +9,13 @@ import io.github.pedrofraca.tour.api.model.Classification
 
 class ClassificationApiDataSource (private val api: TourScrappingService = ServiceFactory().build(TourScrappingService::class.java)): ReadOnlyDataSourceWithFilter<StageClassificationModel, String> {
     override fun get(param: String): StageClassificationModel {
-        val api = api.getClasificationForStage(param).blockingGet()
+        val api = api.getClassificationForStage(param).blockingGet()
 
         return StageClassificationModel(api.mountain.map { it.toClassificationModel() },
                 api.team.map { it.toClassificationModel() },
                 api.general.map { it.toClassificationModel() },
                 api.regularity.map { it.toClassificationModel() },
-                api.stage.map { it.toClassificationModel() },
+                api.stageClassification.map { it.toClassificationModel() },
                 param)
     }
 

@@ -25,7 +25,7 @@ class FullScreenImagesActivity : AppCompatActivity() {
         title = intent.getStringExtra(ATTR_TITLE)
         val stringArrayListExtra = intent.getStringArrayListExtra(ATTR_IMAGES)
         val viewPager = findViewById<View>(R.id.activity_fullscreen_view_pager) as ViewPager
-        viewPager.adapter = StageImagesAdapter(stringArrayListExtra)
+        viewPager.adapter = stringArrayListExtra?.let { StageImagesAdapter(it) }
         val circlePageIndicator = findViewById<View>(R.id.activity_fullscreen_page_indicator) as CirclePageIndicator
         circlePageIndicator.fillColor = resources.getColor(R.color.text_dark_gray)
         circlePageIndicator.strokeColor = resources.getColor(R.color.text_dark_gray)

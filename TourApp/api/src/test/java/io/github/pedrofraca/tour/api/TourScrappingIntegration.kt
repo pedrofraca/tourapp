@@ -17,7 +17,7 @@ class TourScrappingIntegration {
     @Test
     fun classificationEndpoint() {
         val api = ServiceFactory().build(TourScrappingService::class.java)
-        val stages = api.getClasificationForStage("1").blockingGet()
+        val stages = api.getClassificationForStage("1").blockingGet()
         Assert.assertFalse(stages.general.isEmpty())
     }
 }

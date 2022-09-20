@@ -21,7 +21,7 @@ class ServiceFactory {
                 .client(client)
                 .addConverterFactory(MoshiConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl("https://tourscraping.appspot.com")
+                .baseUrl("https://atool.ws")
                 .build()
         return restAdapter.create(theClass)
     }
